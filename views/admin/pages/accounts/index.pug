@@ -1,0 +1,116 @@
+extends ../../layouts/default.pug
+
+block main
+  #content-wrapper.d-flex.flex-column
+    // Main Content
+    #content
+      // Topbar
+      include ../../partials/topbar.pug
+
+      .container.text-center
+        h2.m-3 Quản lý tài khoản
+      .card.my-3
+        h5.card-header Bộ lọc và sắp xếp
+        .card-body
+          .row
+            .col-2 
+              select(name="type" class="form-select form-control py-1 text-center" type-view aria-label=".form-select-lg example")
+                option(value="" selected disabled) --- Hiển thị ---
+                option(value="4") 4 mục         
+                option(value="6") 6 mục
+                option(value="10") 10 mục          
+            .col-5
+              select(name="type" class="form-select form-control py-1 text-center" type-filter aria-label=".form-select-lg example")
+                option(value="" selected disabled) --- Lọc theo trạng thái ---
+                option(value="") Mặc định
+                //- option(value="title desc") Z-A                
+                option(value="active") Đang hoạt động
+                option(value="inactive") Dừng hoặt động
+            .col-5
+              select(name="type" class="form-select form-control py-1 text-center" type-sort aria-label=".form-select-lg example")
+                option(value="" selected disabled) --- Sắp xếp ---
+                option(value="asc") Mặc định A-Z          
+                option(value="desc") Tiêu đề Z-A
+            
+      .card.my-3
+        h5.card-header Cập nhật năng cao
+        .card-body
+            .row
+                .col-5
+                  - if (role.permissions.includes("role-account-edit"))
+                    form(action="/admin/accounts/change-multi?_method=PATCH" method="post" form-changeMulti) 
+                      div.input-group
+                        select(name="type" class="form-select form-control py-1 text-center" type-update aria-label=".form-select-lg example")
+                          option(value="" selected disabled) --- Chỉnh sửa nhiều chủ đề ---
+                          option(value="active") Hoạt động
+                          option(value="inactive") Dừng hoạt động 
+                          option(value="delete-all") Xoá
+                        input(type="text" input-changeMulti name="value" class="d-none") 
+                        button(class="btn btn-primary btn-changeMulti input-group-append") Chấp nhận
+                .col-4.text-right
+                  - if (role.permissions.includes("role-account-add"))
+                    a(href="/admin/accounts/create" class="btn btn-outline-success") + Thêm tài khoản
+
+      table(class="table table-hover m-3 text-center")
+        thead 
+          tr 
+            th 
+              input(type="checkbox" name="" sum-checkbox = accounts.length)
+            th STT
+            th Avatar
+            th Họ và tên
+            th Email
+            th Trạng thái 
+            th Hành động
+        tbody 
+          each account,index in accounts
+            tr
+              td 
+                input(type="checkbox", name="change-multi" change-multi value=account._id)
+              td #{index+1}
+              td 
+                img(src=account.avatar width="100px" height="100px" alt="")
+              td #{account.fullName} 
+              td #{account.email}
+              td
+                - if (role.permissions.includes("role-account-edit"))
+                  - if(account.status == "active")
+                      button(data-update=`${account._id} inactive`).btn.badge.bg-success.text-light.button-status Đang hoạt động 
+                  - else
+                      button(data-update=`${account._id} active`).btn.button-status.badge.bg-danger.text-light Dừng hoạt động
+                - else 
+                  - if(account.status == "active")
+                    span Đang hoạt động
+                  - else 
+                    span Dừng hoạt động
+
+              td 
+                a(href=`/admin/accounts/detail/${account._id}` class="btn btn-secondary mx-1") Chi tiết
+                - if (role.permissions.includes("role-account-edit"))
+                  a(href=`/admin/accounts/edit/${account._id}` class="btn btn-warning mx-1") Sửa
+                - if (role.permissions.includes("role-account-delete"))
+                  button(href="" class="btn btn-danger mx-1 btn-delete" data-update=account._id) Xoá 
+      .container.text-center
+        nav(aria-label="Page navigation example")
+          ul(class="pagination")
+            - if(objPagination.currentPage>1)
+                li(class="page-item")
+                    button(class="page-link" button-pagination=objPagination.currentPage-1 ) Trang trước        
+            - for(let i =objPagination.pageStart;i<=objPagination.pageEnd;i++)
+                li(class="page-item")
+                    button(class=`page-link ${objPagination.currentPage==i?"active":""}`  button-pagination=i) #{i}
+            - if(objPagination.currentPage<objPagination.totalPage)
+                li(class="page-item")
+                    button(class="page-link" button-pagination=objPagination.currentPage+1) Tiếp theo
+      // Footer
+      footer.sticky-footer.bg-white
+        .container.my-auto
+          .copyright.text-center.my-auto
+            span | Copyright © Your Website 2020
+
+  // Scroll to Top Button
+  a#scrollToTopButton.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+
+
+

@@ -1,0 +1,20 @@
+extends ../../layouts/auth.pug
+
+
+block main
+    form(action="/register" method="POST" class="form-group col-5 border py-3 px-3")
+        h2.text-center.my-3 Đăng ký
+        label(for="fullName" class="form-group my-1") Họ và tên: 
+        input(type="text" name="fullName" class="form-control" required placeholder="Nhập họ và tên....")
+        label(for="" class="form-group my-1") email: 
+        input(type="text" name="email" class="form-control" required placeholder="Nhập email....") 
+        label(for="" class="form-group my-1") Mật khẩu:  
+        input(type="password" name="password" class="form-control" required placeholder="Nhập mật khẩu....")
+        label(for="" class="form-group my-1") Nhập lại mật khẩu:  
+        input(type="password" name="rePassword" class="form-control" required placeholder="Nhập mật khẩu....")
+        .text-center
+            input(type="submit" value="Đăng nhập" class="btn btn-primary my-3 form-control")
+        .action.d-flex
+            a(href="/forgot-password" class=" p-2") Quên mật khẩu
+            a(href="/login" class="ml-auto p-2") Đăng nhập
+

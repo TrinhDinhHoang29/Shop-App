@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+
+block main
+  #content-wrapper.d-flex.flex-column
+    // Main Content
+    #content
+      // Topbar
+      include ../../partials/topbar.pug
+      .container.text-center
+        h2.m-3 Thêm vai trò
+      - if (role.permissions.includes("role-role-add"))
+        .container 
+          form(class="form-group" method="POST" action="/admin/roles/create")
+            .mb-3
+              label.form-label(for='title') Tên vai trò
+              input.form-control(type='text' name="title" id="title")
+            .mb-3
+              label.form-label(for='description') Mô tả
+              textarea.form-control(rows="2" name="description" id="description")
+            .mb-3 
+              .form-check-inline
+                label(for="active" class="form-check-label")
+                  input(type="radio" class="form-check-input" id="active" name="status" value="active") 
+                  span Hoạt động
+              .form-check-inline
+                label(for="inactive" class="form-check-label") 
+                  input(type="radio" class="form-check-input" id="inactive" name="status" value="inactive") 
+                  span Dừng hoạt động 
+            button.btn.btn-primary(type='submit') Submit
+      
+      // Footer
+      footer.sticky-footer.bg-white
+        .container.my-auto
+          .copyright.text-center.my-auto
+            span | Copyright © Your Website 2020
+
+  // Scroll to Top Button
+  a#scrollToTopButton.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+
+ 

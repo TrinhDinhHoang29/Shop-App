@@ -1,0 +1,39 @@
+/* 
+Thông báo  */
+.messages{
+    position: fixed;
+    z-index: 1000;
+    right: 30px;
+}
+@keyframes alert-hidden{
+    from {
+        right: 30px;
+    }
+    to{
+        right: -200%;
+    }
+
+}
+.alert-hidden{
+    animation-name: alert-hidden;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+    right: 30px;
+    position: fixed;
+    z-index: 1000;
+}
+.alert-success , .alert-error {
+    
+    color: #0f6848;
+    background-color: #d2f4e8;
+    border-color: #bff0de;
+}
+.custom-file-container > .image-preview > .image-preview-item{
+    height: 200px;
+}
+.custom-file-container > .label-container{
+    display: none;
+}
+.custom-file-container > .input-container{
+display: none;
+}

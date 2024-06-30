@@ -1,0 +1,37 @@
+extends ../../layouts/default.pug
+block main
+    .main-content2
+        .title-first.my-3 
+            h5 Profile
+        .container 
+            form(class="form-group" method="POST" action=`/profile?_method=PATCH` enctype="multipart/form-data")
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Họ và tên 
+                        span.text-danger *
+                    input(type="text" require class="form-control d-block" name="fullName" value=userInfo.fullName)
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Email 
+                        span.text-danger *
+                    .input-group
+                        input(type="text" require class="form-control d-block" name="Email" disabled value=userInfo.email)
+                        .input-group-append
+                            a(href="/profile/change-email" class="btn btn-primary")  Đổi email
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Mật khẩu 
+                        span.text-danger *
+                    .input-group
+                        input(type="password" require class="form-control d-block" name="password" disabled value="***************")
+                        .input-group-append
+                            a(href="/profile/change-password" class="btn btn-primary")  Đổi mật khẩu          
+                div(class="mb-3" upload-image) 
+                    label(class="form-label d-block") Ảnh đại diện
+                    input(type="file" accept="image/*" class="form-file d-block" name="avatar" value=userInfo.avatar upload-image-input)
+                    div
+                        div(class = "" close-image-upload) x 
+                        img(src=userInfo.avatar  alt="" upload-image-preview width="200px" class="d-inline" max-height="200px")   
+                input(type="submit" class="btn btn-primary" value="Chỉnh sửa")
+        
+            
+                   
+                         
+
