@@ -37,7 +37,7 @@ block main
         .card-body
             .row
                 .col-5
-                  - if (role.permissions.includes("role-category-edit"))
+                  - if (role.permissions.includes("role-product-edit"))
                     form(action="/admin/products/change-multi?_method=PATCH" method="post" form-changeMulti) 
                       div.input-group
                         select(name="type" class="form-select form-control py-1 text-center" type-update aria-label=".form-select-lg example")
@@ -48,7 +48,7 @@ block main
                         input(type="text" input-changeMulti name="value" class="d-none") 
                         button(class="btn btn-primary btn-changeMulti input-group-append") Chấp nhận
                 .col-4.text-right
-                  - if (role.permissions.includes("role-category-add"))
+                  - if (role.permissions.includes("role-product-add"))
                     a(href="/admin/products/create" class="btn btn-outline-success") + Thêm chủ đề
 
       table(class="table table-hover m-3 text-center")
@@ -74,14 +74,14 @@ block main
                 img(src=item.thumbnail width="100px" height="100px"  alt="")
               td #{item.title} 
               td 
-                - if (role.permissions.includes("role-song-edit"))
+                - if (role.permissions.includes("role-product-edit"))
                   input(type="number" value=item.posision input-posision=item._id name="posision" min="1")
                 - else 
                   span #{item.posision}
               td #{item.price}
               td #{item.stock}
               td 
-                - if (role.permissions.includes("role-category-edit"))
+                - if (role.permissions.includes("role-product-edit"))
                   - if(item.status === "active")
                     button(data-update=`${item._id} inactive`).btn.badge.bg-success.text-light.button-status Đang hoạt động 
                   - else
@@ -93,9 +93,9 @@ block main
                     span Dừng hoạt động
               td
                 a(href=`/admin/products/detail/${item._id}` class="btn btn-secondary mx-1") Chi tiết
-                - if (role.permissions.includes("role-category-edit"))
+                - if (role.permissions.includes("role-product-edit"))
                   a(href=`/admin/products/edit/${item._id}` class="btn btn-warning mx-1") Sửa
-                - if (role.permissions.includes("role-category-delete"))
+                - if (role.permissions.includes("role-product-delete"))
                   button(href="" class="btn btn-danger mx-1 btn-delete" data-update=item._id) Xoá 
       .container.text-center
         nav(aria-label="Page navigation example")

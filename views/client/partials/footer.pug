@@ -1,1 +1,85 @@
-.text-center.bg-secondary @music app
+// Footer Section Begin
+footer.footer
+  .container
+    .row
+      .col-lg-4.col-md-6.col-sm-7
+        .footer__about
+          .footer__logo
+            a(href='./index.html')
+              img(src='img/logo.png', alt='')
+          p
+            | Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+            | cilisis.
+          .footer__payment
+            a(href='#')
+              img(src='img/payment/payment-1.png', alt='')
+            a(href='#')
+              img(src='img/payment/payment-2.png', alt='')
+            a(href='#')
+              img(src='img/payment/payment-3.png', alt='')
+            a(href='#')
+              img(src='img/payment/payment-4.png', alt='')
+            a(href='#')
+              img(src='img/payment/payment-5.png', alt='')
+      .col-lg-2.col-md-3.col-sm-5
+        .footer__widget
+          h6 Quick links
+          ul
+            li
+              a(href='#') About
+            li
+              a(href='#') Blogs
+            li
+              a(href='#') Contact
+            li
+              a(href='#') FAQ
+      .col-lg-2.col-md-3.col-sm-4
+        .footer__widget
+          h6 Account
+          ul
+            li
+              a(href='#') My Account
+            li
+              a(href='#') Orders Tracking
+            li
+              a(href='#') Checkout
+            li
+              a(href='#') Wishlist
+      .col-lg-4.col-md-8.col-sm-8
+        .footer__newslatter
+          h6 NEWSLETTER
+          form(action='#')
+            input(type='text', placeholder='Email')
+            button.site-btn(type='submit') Subscribe
+          .footer__social
+            a(href='#')
+              i.fa.fa-facebook
+            a(href='#')
+              i.fa.fa-twitter
+            a(href='#')
+              i.fa.fa-youtube-play
+            a(href='#')
+              i.fa.fa-instagram
+            a(href='#')
+              i.fa.fa-pinterest
+    .row
+      .col-lg-12
+        // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+        .footer__copyright__text
+          p
+            | Copyright &copy; 
+            script.
+              document.write(new Date().getFullYear());
+            |  All rights reserved | This template is made with 
+            i.fa.fa-heart(aria-hidden='true')
+            |  by 
+            a(href='https://colorlib.com', target='_blank') Colorlib
+        // Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+// Footer Section End
+// Search Begin
+.search-model
+  .h-100.d-flex.align-items-center.justify-content-center
+    .search-close-switch +
+    form.search-model-form
+      input#search-input(type='text', placeholder='Search here.....')
+// Search End

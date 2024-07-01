@@ -2,7 +2,6 @@ import express,{Express, Request,Response} from 'express';
 import productsModel from '../../models/products.model';
 import * as isValid from "../../validates/isValids.validates";
 import paginationHelper from '../../helpers/pagination';
-import roleModel from '../../models/roles.model';
 import productCategorysModel from '../../models/product-categorys.model';
 export const index = async (req:Request,res:Response):Promise<void>=>{
     type typeFilter={
@@ -43,7 +42,7 @@ export const create = async (req:Request,res:Response):Promise<void>=>{
     res.render("admin/pages/products/create",{productCategorys});
 }
 export const createPost = async (req:Request,res:Response):Promise<void>=>{
-    const {title,description,price,discountPercentage,stock,status,thumbnail,images,productCategoryId} = req.body;
+    const {type,title,description,price,discountPercentage,stock,status,thumbnail,images,productCategoryId} = req.body;
     let posision:any = req.body.posision;
     if(!posision.trim()){
         posision = await productsModel.countDocuments({deleted:false});
@@ -58,7 +57,8 @@ export const createPost = async (req:Request,res:Response):Promise<void>=>{
         thumbnail:thumbnail,
         images:images,
         posision:parseInt(posision),
-        productCategoryId:productCategoryId
+        productCategoryId:productCategoryId,
+        type:type
     }
     try{
         const product = new productsModel(productBody);
@@ -82,9 +82,11 @@ export const detail = async (req:Request,res:Response):Promise<void>=>{
 }
 export const edit = async (req:Request,res:Response):Promise<void>=>{
     const id = req.params.id;
+    const productCategorys = await productCategorysModel.find({});
+
     try{
         const product = await productsModel.findOne({_id:id});
-        res.render("admin/pages/products/edit",{product:product})
+        res.render("admin/pages/products/edit",{product:product,productCategorys:productCategorys})
     }catch(error){
         res.redirect("back");
     }
@@ -92,7 +94,7 @@ export const edit = async (req:Request,res:Response):Promise<void>=>{
 }
 export const editPatch = async(req:Request,res:Response):Promise<void>=>{
     const id = req.params.id; 
-    const {title,description,price,discountPercentage,stock,status,thumbnail,images} = req.body;
+    const {type,title,description,price,discountPercentage,stock,status,thumbnail,images,productCategoryId} = req.body;
     const productBody = {
         title:title,
         description:description,
@@ -102,6 +104,9 @@ export const editPatch = async(req:Request,res:Response):Promise<void>=>{
         status:status,
         thumbnail:thumbnail,
         images:images,
+        productCategoryId:productCategoryId,
+        type:type
+
     }
 
     try{

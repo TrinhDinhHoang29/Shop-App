@@ -1,7 +1,7 @@
 import express,{Express,} from 'express';
 import doenv from 'dotenv';
 import * as database from './config/database';
-// import routerClient from './routes/client/index.router';
+import routerClient from './routes/client/index.router';
 import routerAdmin from './routes/admin/index.router';
 import path from 'path';
 import methodOverride from 'method-override';
@@ -41,7 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
-// routerClient(app);
+routerClient(app);
 routerAdmin(app);
 
 app.get("*",(req,res)=>{

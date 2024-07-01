@@ -12,6 +12,7 @@ const productSchema:Schema = new  mongoose.Schema({
     status:String,
     images:Array,
     posision:Number,
+    type:String,
     slug:{
         type:String,
         slug:"title",

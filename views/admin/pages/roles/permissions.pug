@@ -60,22 +60,22 @@ block main
                         input(type="checkbox"  act="role-account-edit")
                   tr 
                       td 
-                          b Quản lý nhạc 
+                          b Quản lý sản phẩm
                   tr(row) 
                     td Thêm  
                     each role in roles 
                       td 
-                        input(type="checkbox"  act="role-song-add")
+                        input(type="checkbox"  act="role-product-add")
                   tr(row) 
                     td Xoá 
                     each role in roles 
                       td 
-                        input(type="checkbox"  act="role-song-delete")
+                        input(type="checkbox"  act="role-product-delete")
                   tr(row) 
                     td Sửa 
                     each role in roles 
                       td 
-                        input(type="checkbox"  act="role-song-edit")
+                        input(type="checkbox"  act="role-product-edit")
                   tr 
                       td 
                           b Quản lý chủ đề nhạc 
@@ -96,7 +96,7 @@ block main
                         input(type="checkbox"  act="role-topic-edit")
                   tr 
                       td 
-                          b Quản lý danh mục 
+                          b Quản lý danh mục sản phẩm
                   tr(row) 
                     td Thêm  
                     each role in roles 
@@ -112,24 +112,6 @@ block main
                     each role in roles 
                       td 
                         input(type="checkbox"  act="role-category-edit")
-                  tr 
-                      td 
-                          b Quản lý ca sỹ 
-                  tr(row) 
-                    td Thêm  
-                    each role in roles 
-                      td 
-                        input(type="checkbox"  act="role-singer-add")
-                  tr(row) 
-                    td Xoá 
-                    each role in roles 
-                      td 
-                        input(type="checkbox"  act="role-singer-delete")
-                  tr(row) 
-                    td Sửa 
-                    each role in roles 
-                      td 
-                        input(type="checkbox"  act="role-singer-edit")
                   tr 
                       td 
                           b Quản lý vai trò 

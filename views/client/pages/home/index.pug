@@ -1,19 +1,249 @@
 extends ../../layouts/default.pug
-include ../../mixins/list-music.pug
 
 block main
-    .main-content2
-        .title-first.my-3 
-            h5 Chủ đề nổi bật
-        ul.banner-topic.d-flex.my-3
-            each topic in topics
-                li
-                    a(href=`/topics/detail/${topic.slug}`)
-                        img(src=topic.avatar width="80%"  alt="")
-                    .title-topic #{topic.title}                
-        .title-second.my-3 
-            h5 Mới phát hành
-        +list-music(songs)
-                   
-                         
+  // Categories Section Begin
+  section.categories
+    .container-fluid
+      .row
+        .col-lg-6.p-0
+          .categories__item.categories__large__item.set-bg(data-setbg=categorys[0].thumbnail)
+            .categories__text
+              h1 #{categorys[0].title}
+              p !{categorys[0].description}
+              a(href=`/categorys/${categorys[0].slug}`) Shop now        
+        .col-lg-6
+          .row
+            each category,index in categorys
+              - if(index!==0)
+                .col-lg-6.col-md-6.col-sm-6.p-0
+                  .categories__item.set-bg(data-setbg=category.thumbnail)
+                    .categories__text
+                      h4 #{category.title}
+                      p 358 items
+                      a(href=`/categogys/${category.slug}`) Shop now
 
+  // Categories Section End
+  // Product Section Begin
+  section.product.spad
+    .container
+      .row
+        .col-lg-4.col-md-4
+          .section-title
+            h4 New product
+        .col-lg-8.col-md-8
+          ul.filter__controls
+            li.active(data-filter='*') All
+            each category in categorys 
+              li(data-filter=`.${category.slug}`) #{category.title}
+      .row.property__gallery
+        each product,index in products
+          .col-lg-3.col-md-4.col-sm-6.mix(class=product.slugCategory)
+            .product__item
+              .product__item__pic.set-bg(data-setbg=product.thumbnail)
+                - if(product.stock===0)
+                  .label.stockout out of stock
+                - else if (product.discountPercentage>0)
+                  .label.sale -#{product.discountPercentage}%
+                - else
+                  .label.new New
+                ul.product__hover
+                  li
+                    a.image-popup(href=product.thumbnail)
+                      span.arrow_expand
+                  li
+                    a(href='#')
+                      span.icon_heart_alt
+                  li
+                    a(href='#')
+                      span.icon_bag_alt
+              .product__item__text
+                h6
+                  a(href=`/products/${product.slug}`) #{product.title}
+                .rating
+                  i.fa.fa-star.mx-1
+                  i.fa.fa-star.mx-1
+                  i.fa.fa-star.mx-1
+                  i.fa.fa-star.mx-1
+                  i.fa.fa-star.mx-1
+                .product__price $ #{product.price-(product.price*product.discountPercentage)/100}
+                  - if (product.discountPercentage > 0)
+                    span $ #{product.price} 
+  // Product Section End
+  // Banner Section Begin
+  section.banner.set-bg(data-setbg='img/banner/banner-1.jpg')
+    .container
+      .row
+        .col-xl-7.col-lg-8.m-auto
+          .banner__slider.owl-carousel
+            .banner__item
+              .banner__text
+                span The Chloe Collection
+                h1 The Project Jacket
+                a(href='#') Shop now
+            .banner__item
+              .banner__text
+                span The Chloe Collection
+                h1 The Project Jacket
+                a(href='#') Shop now
+            .banner__item
+              .banner__text
+                span The Chloe Collection
+                h1 The Project Jacket
+                a(href='#') Shop now
+  // Banner Section End
+  // Trend Section Begin
+  section.trend.spad
+    .container
+      .row
+        .col-lg-4.col-md-4.col-sm-6
+          .trend__content
+            .section-title
+              h4 Hot Trend
+            each productTrend in productTrends 
+              .trend__item
+                .trend__item__pic
+                  img(src=productTrend.thumbnail width="90px" height="90px" alt='')
+                .trend__item__text
+                  a(href=`/products/${productTrend.slug}`) 
+                    h6 #{productTrend.title}
+                  .rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                  .product__price $ #{productTrend.price - (productTrend.price*productTrend.discountPercentage/100)}
+                    - if (productTrend.discountPercentage>0)
+                      span $ #{productTrend.price}    
+        .col-lg-4.col-md-4.col-sm-6
+          .trend__content
+            .section-title
+              h4 Best seller
+            each productSeller in productSellers
+              .trend__item
+                .trend__item__pic
+                  img(src=productSeller.thumbnail width="90px" height="90px" alt='')
+                .trend__item__text
+                  a(href=`/products/${productSeller.slug}`) 
+                    h6 #{productSeller.title}
+                  .rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                  .product__price $ #{productSeller.price - (productSeller.price*productSeller.discountPercentage/100)}
+                    - if (productSeller.discountPercentage>0)
+                      span $ #{productSeller.price} 
+        .col-lg-4.col-md-4.col-sm-6
+          .trend__content
+            .section-title
+              h4 Feature
+            each productFeature in productFeatures
+              .trend__item
+                .trend__item__pic
+                  img(src=productFeature.thumbnail width="90px" height="90px" alt='')
+                .trend__item__text
+                  a(href=`/products/${productFeature.slug}`) 
+                    h6 #{productFeature.title}
+                  .rating
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                    i.fa.fa-star
+                  .product__price $ #{productFeature.price - (productFeature.price*productFeature.discountPercentage/100)}
+                    - if (productFeature.discountPercentage>0)
+                      span $ #{productFeature.price} 
+           
+  // Trend Section End
+  // Discount Section Begin
+  section.discount
+    .container
+      .row
+        .col-lg-6.p-0
+          .discount__pic
+            img(src='img/discount.jpg', alt='')
+        .col-lg-6.p-0
+          .discount__text
+            .discount__text__title
+              span Discount
+              h2 Summer 2019
+              h5
+                span Sale
+                |  50%
+            #countdown-time.discount__countdown
+              .countdown__item
+                span 22
+                p Days
+              .countdown__item
+                span 18
+                p Hour
+              .countdown__item
+                span 46
+                p Min
+              .countdown__item
+                span 05
+                p Sec
+            a(href='#') Shop now
+  // Discount Section End
+  // Services Section Begin
+  section.services.spad
+    .container
+      .row
+        .col-lg-3.col-md-4.col-sm-6
+          .services__item
+            i.fa.fa-car
+            h6 Free Shipping
+            p For all oder over $99
+        .col-lg-3.col-md-4.col-sm-6
+          .services__item
+            i.fa.fa-money
+            h6 Money Back Guarantee
+            p If good have Problems
+        .col-lg-3.col-md-4.col-sm-6
+          .services__item
+            i.fa.fa-support
+            h6 Online Support 24/7
+            p Dedicated support
+        .col-lg-3.col-md-4.col-sm-6
+          .services__item
+            i.fa.fa-headphones
+            h6 Payment Secure
+            p 100% secure payment
+  // Services Section End
+  // Instagram Begin
+  .instagram
+    .container-fluid
+      .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-1.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-2.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-3.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-4.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-5.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='img/instagram/insta-6.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+  // Instagram End

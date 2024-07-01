@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/parent-category
 
 block main
   #content-wrapper.d-flex.flex-column
@@ -8,7 +9,7 @@ block main
       include ../../partials/topbar.pug
       .container.text-center
         h2.m-3 Sửa sản phẩm
-      - if (role.permissions.includes("role-role-add"))
+      - if (role.permissions.includes("role-product-add"))
         .container 
           form(class="form-group"  action=`/admin/products/edit/${product._id}?_method=PATCH` method="POST" enctype="multipart/form-data")
             .mb-3
@@ -17,6 +18,11 @@ block main
             .mb-3
               label.form-label(for='description') Mô tả
               textarea.form-control(rows="2" name="description" id="description") !{product.description}
+            .mb-3 
+                label(class="form-label") Danh mục sản phẩm
+                select(name="productCategoryId"  class="form-control")
+                    option(value="" selected ) ----- Chọn danh mục -----
+                    +parent-category(productCategorys,1,product.productCategoryId)
             .mb-3
               label.form-label(for='price') Gía 
               input.form-control(type='number' min="0" name="price" value=product.price required id="price")
@@ -26,6 +32,23 @@ block main
             .mb-3
               label.form-label(for='stock') Số lượng 
               input.form-control(type='number' name="stock" value=product.stock required min="1" id="stock")
+            .mb-3 
+              .form-check-inline
+                label(for="trend" class="form-check-label")
+                  input(type="radio" class="form-check-input" checked=(product.type==="trend"?true:false) id="trend" name="type" value="trend") 
+                  span HOT TREND
+              .form-check-inline
+                label(for="seller" class="form-check-label") 
+                  input(type="radio" class="form-check-input" checked=(product.type==="seller"?true:false) id="seller" name="type" value="seller") 
+                  span BEST SELLER
+              .form-check-inline
+                label(for="feature" class="form-check-label") 
+                  input(type="radio" class="form-check-input" checked=(product.type==="feature"?true:false)  id="feature" name="type" value="feature") 
+                  span FEATURE 
+              .form-check-inline
+                label(for="normal" class="form-check-label") 
+                  input(type="radio" class="form-check-input" checked=(product.type==="normal"?true:false)  id="normal" name="type" value="normal") 
+                  span NORMAL
             .mb-3 
               .form-check-inline
                 label(for="active" class="form-check-label")

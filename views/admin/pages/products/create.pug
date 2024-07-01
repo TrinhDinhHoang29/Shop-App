@@ -9,7 +9,7 @@ block main
       include ../../partials/topbar.pug
       .container.text-center
         h2.m-3 Thêm sản phẩm
-      - if (role.permissions.includes("role-role-add"))
+      - if (role.permissions.includes("role-product-add"))
         .container 
           form(class="form-group"  action="/admin/products/create" method="POST" enctype="multipart/form-data")
             .mb-3
@@ -35,6 +35,23 @@ block main
             .mb-3
               label.form-label(for='stock') Số lượng 
               input.form-control(type='number' name="stock" required min="1" id="stock")
+            .mb-3 
+              .form-check-inline
+                label(for="trend" class="form-check-label")
+                  input(type="radio" class="form-check-input" id="trend" name="type" value="trend") 
+                  span HOT TREND
+              .form-check-inline
+                label(for="seller" class="form-check-label") 
+                  input(type="radio" class="form-check-input" id="seller" name="type" value="seller") 
+                  span BEST SELLER
+              .form-check-inline
+                label(for="feature" class="form-check-label") 
+                  input(type="radio" class="form-check-input" id="feature" name="type" value="feature") 
+                  span FEATURE 
+              .form-check-inline
+                label(for="normal" class="form-check-label") 
+                  input(type="radio" class="form-check-input" id="normal" name="type" value="normal") 
+                  span NORMAL
             .mb-3 
               .form-check-inline
                 label(for="active" class="form-check-label")

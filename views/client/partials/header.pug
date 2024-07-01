@@ -1,23 +1,79 @@
-.head-content2.container.py-3.row
-    form(action="/search" class="col-6" method="get")
-        .input-group.find-header
-            input(class="form-control" name="keyword")
-            button(class="btn px-3")
-                i(class="fa-solid fa-magnifying-glass")
-            .suggest-find-header.show
-                
-                    
-                
-                
-
-    .col-6.d-flex.justify-content-evenly
-        a(href=(userInfo?"/favorites":"/login") class="btn text-light") 
-            i(class="fa-solid fa-heart text-danger")
-            span.mx-2 Yêu thích  
-        a(href=(userInfo?"/profile":"/login") class = "btn text-light")
-            i(class="fa-solid fa-user")
-            span.mx-2 Hồ sơ
-        - if (userInfo) 
-            a(href="/logout" class = "btn text-light")
-                i(class="fa-solid fa-right-from-bracket")
-                span.mx-2 Đăng xuất
+// Page Preloder
+#preloder
+  .loader
+// Offcanvas Menu Begin
+.offcanvas-menu-overlay
+.offcanvas-menu-wrapper
+  .offcanvas__close +
+  ul.offcanvas__widget
+    li
+      span.icon_search.search-switch
+    li
+      a(href='#')
+        span.icon_heart_alt
+        .tip 2
+    li
+      a(href='#')
+        span.icon_bag_alt
+        .tip 2
+  .offcanvas__logo
+    a(href='./index.html')
+      img(src='img/logo.png', alt='')
+  #mobile-menu-wrap
+  .offcanvas__auth
+    a(href='#') Login
+    a(href='#') Register
+// Offcanvas Menu End
+// Header Section Begin
+header.header
+  .container-fluid
+    .row
+      .col-xl-3.col-lg-2
+        .header__logo
+          a(href='./index.html')
+            img(src='img/logo.png', alt='')
+      .col-xl-6.col-lg-7
+        nav.header__menu
+          ul
+            li.active
+              a(href='./index.html') Home
+            li
+              a(href='#') Women&rsquo;s
+            li
+              a(href='#') Men&rsquo;s
+            li
+              a(href='./shop.html') Shop
+            li
+              a(href='#') Pages
+              ul.dropdown
+                li
+                  a(href='./product-details.html') Product Details
+                li
+                  a(href='./shop-cart.html') Shop Cart
+                li
+                  a(href='./checkout.html') Checkout
+                li
+                  a(href='./blog-details.html') Blog Details
+            li
+              a(href='./blog.html') Blog
+            li
+              a(href='./contact.html') Contact
+      .col-lg-3
+        .header__right
+          .header__right__auth
+            a(href='#') Login
+            a(href='#') Register
+          ul.header__right__widget
+            li
+              span.icon_search.search-switch
+            li
+              a(href='#')
+                span.icon_heart_alt
+                .tip 2
+            li
+              a(href='#')
+                span.icon_bag_alt
+                .tip 2
+    .canvas__open
+      i.fa.fa-bars
+// Header Section End
