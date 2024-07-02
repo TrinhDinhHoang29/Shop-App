@@ -25,5 +25,11 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
     const productFeatures = await productsModel.find({status:"active",deleted:false,type:"feature"}).limit(3).sort({posision:"asc"});
 
     
-    res.render("client/pages/home/index",{categorys,products,productSellers,productTrends,productFeatures});
+    res.render("client/pages/home/index",{
+        categorys,
+        products,
+        productSellers,
+        productTrends,
+        productFeatures
+    });
 }

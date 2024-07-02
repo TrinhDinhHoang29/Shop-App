@@ -107,11 +107,11 @@ block main
                   a(href=`/products/${productTrend.slug}`) 
                     h6 #{productTrend.title}
                   .rating
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
                   .product__price $ #{productTrend.price - (productTrend.price*productTrend.discountPercentage/100)}
                     - if (productTrend.discountPercentage>0)
                       span $ #{productTrend.price}    
@@ -127,11 +127,11 @@ block main
                   a(href=`/products/${productSeller.slug}`) 
                     h6 #{productSeller.title}
                   .rating
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
                   .product__price $ #{productSeller.price - (productSeller.price*productSeller.discountPercentage/100)}
                     - if (productSeller.discountPercentage>0)
                       span $ #{productSeller.price} 
@@ -147,11 +147,11 @@ block main
                   a(href=`/products/${productFeature.slug}`) 
                     h6 #{productFeature.title}
                   .rating
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
-                    i.fa.fa-star
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
+                    i.fa.fa-star.mx-1
                   .product__price $ #{productFeature.price - (productFeature.price*productFeature.discountPercentage/100)}
                     - if (productFeature.discountPercentage>0)
                       span $ #{productFeature.price} 

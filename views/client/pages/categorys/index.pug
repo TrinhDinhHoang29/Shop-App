@@ -1,0 +1,204 @@
+extends ../../layouts/default.pug
+
+block main
+  // Breadcrumb Begin
+  .breadcrumb-option
+    .container
+      .row
+        .col-lg-12
+          .breadcrumb__links
+            a(href='./index.html')
+              i.fa.fa-home
+              |  Home
+            span Shop
+  // Breadcrumb End
+  // Shop Section Begin
+  section.shop.spad
+    .container
+      .row
+        .col-lg-3.col-md-3
+          .shop__sidebar
+            .sidebar__categories
+              .section-title
+                h4 Categories
+              .categories__accordion
+                #accordionExample.accordion
+                 each category in categorysHeader
+                  .card
+                    .card-heading.active
+                      a(href=`/categorys/${category.slug}` data-toggle='collapse', data-target=`#${category.slug}`) #{category.title}
+                    .collapse.show(id=category.slug data-parent='#accordionExample')
+                      .card-body 
+                        ul
+                            - if (category.childItem)
+                                each categoryChild in category.childItem
+                                    li
+                                        a(href=`/categorys/${categoryChild.slug}`) #{categoryChild.title}
+                          
+                 
+            .sidebar__filter
+              .section-title
+                h4 Shop by price
+              .filter-range-wrap
+                .price-range.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content(data-min='33', data-max='99')
+                .range-slider
+                  .price-input
+                    p Price:
+                    input#minamount(type='text')
+                    input#maxamount(type='text')
+              a(href='#') Filter
+            .sidebar__sizes
+              .section-title
+                h4 Shop by size
+              .size__list
+                label(for='xxs')
+                  | xxs
+                  input#xxs(type='checkbox')
+                  span.checkmark
+                label(for='xs')
+                  | xs
+                  input#xs(type='checkbox')
+                  span.checkmark
+                label(for='xss')
+                  | xs-s
+                  input#xss(type='checkbox')
+                  span.checkmark
+                label(for='s')
+                  | s
+                  input#s(type='checkbox')
+                  span.checkmark
+                label(for='m')
+                  | m
+                  input#m(type='checkbox')
+                  span.checkmark
+                label(for='ml')
+                  | m-l
+                  input#ml(type='checkbox')
+                  span.checkmark
+                label(for='l')
+                  | l
+                  input#l(type='checkbox')
+                  span.checkmark
+                label(for='xl')
+                  | xl
+                  input#xl(type='checkbox')
+                  span.checkmark
+            .sidebar__color
+              .section-title
+                h4 Shop by size
+              .size__list.color__list
+                label(for='black')
+                  | Blacks
+                  input#black(type='checkbox')
+                  span.checkmark
+                label(for='whites')
+                  | Whites
+                  input#whites(type='checkbox')
+                  span.checkmark
+                label(for='reds')
+                  | Reds
+                  input#reds(type='checkbox')
+                  span.checkmark
+                label(for='greys')
+                  | Greys
+                  input#greys(type='checkbox')
+                  span.checkmark
+                label(for='blues')
+                  | Blues
+                  input#blues(type='checkbox')
+                  span.checkmark
+                label(for='beige')
+                  | Beige Tones
+                  input#beige(type='checkbox')
+                  span.checkmark
+                label(for='greens')
+                  | Greens
+                  input#greens(type='checkbox')
+                  span.checkmark
+                label(for='yellows')
+                  | Yellows
+                  input#yellows(type='checkbox')
+                  span.checkmark
+        .col-lg-9.col-md-9
+          .row
+            each product in products
+                .col-lg-4.col-md-6
+                    .product__item
+                        .product__item__pic.set-bg(data-setbg=product.thumbnail)
+                            - if(product.stock===0)
+                                .label.stockout out of stock
+                            - else if (product.discountPercentage>0)
+                                .label.sale -#{product.discountPercentage}%
+                            ul.product__hover
+                                li
+                                    a.image-popup(href=product.thumbnail)
+                                        span.arrow_expand
+                                li
+                                    a(href='#')
+                                        span.icon_heart_alt
+                                li
+                                    a(href='#')
+                                        span.icon_bag_alt
+                        .product__item__text
+                            h6
+                                a(href='#') #{product.title}
+                            .rating
+                                i.fa.fa-star.mx-1
+                                i.fa.fa-star.mx-1
+                                i.fa.fa-star.mx-1
+                                i.fa.fa-star.mx-1
+                                i.fa.fa-star.mx-1
+                            .product__price $ #{product.price-(product.price*product.discountPercentage)/100}
+                                - if (product.discountPercentage > 0)
+                                    span $ #{product.price} 
+
+            .col-lg-12.text-center
+              .pagination__option
+                - if(objPagination.currentPage>1)
+                    a(href=`/categorys/${category.slug}?page=${objPagination.currentPage-1}`)
+                        i.fa.fa-angle-left   
+                - for(let i =objPagination.pageStart;i<=objPagination.pageEnd;i++)
+                    a(href=`/categorys/${category.slug}?page=${i}`) #{i}
+                - if(objPagination.currentPage<objPagination.totalPage)
+                    a(href=`/categorys/${category.slug}?page=${objPagination.currentPage+1}`)
+                        i.fa.fa-angle-right                
+                      
+                
+              
+  // Shop Section End  
+  // Instagram Begin
+  .instagram
+    .container-fluid
+      .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-1.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-2.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-3.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-4.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-5.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-6.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+  // Instagram End
+  

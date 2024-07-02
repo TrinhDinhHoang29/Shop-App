@@ -36,11 +36,11 @@ header.header
         nav.header__menu
           ul
             li.active
-              a(href='./index.html') Home
-            li
-              a(href='#') Women&rsquo;s
-            li
-              a(href='#') Men&rsquo;s
+              a(href='/') Home
+            li.category-header
+              a(href='/Products') Products
+              +tree-category(categorysHeader) 
+
             li
               a(href='./shop.html') Shop
             li

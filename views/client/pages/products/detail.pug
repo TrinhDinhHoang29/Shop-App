@@ -1,0 +1,198 @@
+extends ../../layouts/default.pug
+
+block main
+  // Breadcrumb Begin
+  .breadcrumb-option
+    .container
+      .row
+        .col-lg-12
+          .breadcrumb__links
+            a(href='./index.html')
+              i.fa.fa-home
+              |  Home
+            a(href='#') Women&rsquo;s 
+            span Essential structured blazer
+  // Breadcrumb End
+  // Product Details Section Begin
+  section.product-details.spad
+    .container
+      .row
+        .col-lg-6
+          .product__details__pic
+            .product__details__pic__left.product__thumb.nice-scroll
+              a.pt.active(href='#product-1')
+                img(src=product.thumbnail, alt='')
+              each img in product.images 
+                a.pt(href='#product-2')
+                    img(src=img, alt='')
+            
+            .product__details__slider__content
+              .product__details__pic__slider.owl-carousel
+                img.product__big__img(data-hash='product-1', src=product.thumbnail, alt='')
+                each img in product.images      
+                    img.product__big__img(data-hash='product-2', src=img, alt='')
+                
+        .col-lg-6
+          .product__details__text
+            h3
+              | #{product.title} 
+            .rating
+              i.fa.fa-star.mx-1
+              i.fa.fa-star.mx-1
+              i.fa.fa-star.mx-1
+              i.fa.fa-star.mx-1
+              i.fa.fa-star.mx-1
+              span ( 138 reviews )
+            .product__details__price $ #{product.price - (product.price*product.discountPercentage/100)}
+                - if (product.discountPercentage>0)
+                    span $ #{product.price} 
+            .product__details__button
+              .quantity
+                span Quantity:
+                .pro-qty
+                  input(type='text', value='1')
+              a.cart-btn(href='#')
+                span.icon_bag_alt
+                |  Add to cart
+              ul
+                li
+                  a(href='#')
+                    span.icon_heart_alt
+                li
+                  a(href='#')
+                    span.icon_adjust-horiz
+            .product__details__widget
+              ul
+                li
+                  span Availability:
+                  .stock__checkbox
+                    label(for='stockin')
+                      | In Stock
+                      input#stockin(type='checkbox')
+                      span.checkmark
+                li
+                  span Available color:
+                  .color__checkbox
+                    label(for='red')
+                      input#red(type='radio', name='color__radio', checked='')
+                      span.checkmark
+                    label(for='black')
+                      input#black(type='radio', name='color__radio')
+                      span.checkmark.black-bg
+                    label(for='grey')
+                      input#grey(type='radio', name='color__radio')
+                      span.checkmark.grey-bg
+                li
+                  span Available size:
+                  .size__btn
+                    label.active(for='xs-btn')
+                      input#xs-btn(type='radio')
+                      |                                             xs
+                    label(for='s-btn')
+                      input#s-btn(type='radio')
+                      |                                             s
+                    label(for='m-btn')
+                      input#m-btn(type='radio')
+                      |                                             m
+                    label(for='l-btn')
+                      input#l-btn(type='radio')
+                      |                                             l
+                li
+                  span Promotions:
+                  p Free shipping
+        .col-lg-12
+          .product__details__tab
+            ul.nav.nav-tabs(role='tablist')
+              li.nav-item
+                a.nav-link.active(data-toggle='tab', href='#tabs-1', role='tab') Description
+              li.nav-item
+                a.nav-link(data-toggle='tab', href='#tabs-2', role='tab') Reviews ( 2 )
+            .tab-content
+              #tabs-1.tab-pane.active(role='tabpanel')
+                p !{product.description}
+              #tabs-2.tab-pane(role='tabpanel')
+                h6 Reviews ( 2 )
+                p
+                  | Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
+                  | quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
+                  | Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
+                  | voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
+                  | consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
+                  | consequat massa quis enim.
+                p
+                  | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
+                  | dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
+                  | nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
+                  | quis, sem.
+      .row
+        .col-lg-12.text-center
+          .related__title
+            h5 RELATED PRODUCTS
+        each item in products
+            .col-lg-3.col-md-4.col-sm-6
+                .product__item
+                    .product__item__pic.set-bg(data-setbg=item.thumbnail)
+                        - if(item.stock===0)
+                            .label.stockout out of stock
+                        - else if (item.discountPercentage>0)
+                            .label.sale -#{item.discountPercentage}%
+                        ul.product__hover
+                            li
+                                a.image-popup(href=item.thumbnail)
+                                    span.arrow_expand
+                            li
+                                a(href='#')
+                                    span.icon_heart_alt
+                            li
+                                a(href='#')
+                                    span.icon_bag_alt
+                    .product__item__text
+                        h6
+                            a(href='#') Buttons tweed blazer
+                        .rating
+                            i.fa.fa-star.mx-1
+                            i.fa.fa-star.mx-1
+                            i.fa.fa-star.mx-1
+                            i.fa.fa-star.mx-1
+                            i.fa.fa-star.mx-1
+                        .product__price $ #{item.price-(item.price*item.discountPercentage)/100}
+                            - if (item.discountPercentage > 0)
+                                span $ #{item.price} 
+        
+  // Product Details Section End
+  // Instagram Begin
+  .instagram
+    .container-fluid
+      .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-1.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-2.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-3.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-4.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-5.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-6.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+  // Instagram End
+  

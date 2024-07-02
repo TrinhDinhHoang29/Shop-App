@@ -1,0 +1,7 @@
+mixin tree-category(categorys)
+    ul 
+        each category in categorys 
+            li.py-2 
+                a(href=`/categorys/${category.slug}`) #{category.title}
+                - if (category.childItem)
+                    +tree-category(category.childItem)

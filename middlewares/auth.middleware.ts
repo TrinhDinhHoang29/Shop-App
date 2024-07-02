@@ -2,6 +2,8 @@ import accountModel from '../models/account.model';
 import roleModel from '../models/roles.model';
 import usertModel from '../models/user.model';
 import { Request,Response,NextFunction } from 'express';
+import categorysModel from '../models/product-categorys.model';
+import { treeCategorys } from '../helpers/treeCategorys.helper';
  
 // const roleModel = require("../../models/roles.model");
 export  const checkToken = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
@@ -22,13 +24,13 @@ export const existsTokenUser = async (req:Request,res:Response,next:NextFunction
     if(req.cookies.tokenUser){
         const user = await usertModel.findOne({deleted:false,status:"active",tokenUser:req.cookies.tokenUser}).select("-password");
         if(user){
-            // const favorites = await favoriteModel.find({userId:user.id});
-            // res.locals.favoritesLocal = favorites;
             res.locals.userInfo = user;
         }
             
     }
-
+    const categorysHeader = await categorysModel.find({status:"active",deleted:false});
+    const formatCategorysHeader = treeCategorys(categorysHeader);
+    res.locals.categorysHeader = formatCategorysHeader;
     next();
 }
 export const existsUserInfo = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{

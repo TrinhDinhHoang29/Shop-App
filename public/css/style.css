@@ -38,6 +38,31 @@ body {
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
 }
+
+.category-header,.category-header li {
+	position: relative;
+}
+.category-header li {
+	width: 100%;
+}
+.category-header ul{
+	position: absolute;
+	width: 200px;
+	display: none;
+	background-color: #ffffff;
+	z-index: 200;
+}
+.category-header:hover > ul {
+	display: block;
+}
+.category-header  ul>li:hover>ul{
+	display: block;
+	top: 0;
+	left: 200px;
+}
+
+
+
 .messages{
     position: fixed;
     z-index: 1000;
