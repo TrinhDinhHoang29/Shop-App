@@ -1,0 +1,109 @@
+extends ../../layouts/default.pug
+
+block main
+  // Breadcrumb Begin
+  .breadcrumb-option
+    .container
+      .row
+        .col-lg-12
+          .breadcrumb__links
+            a(href='/')
+              i.fa.fa-home
+              |  Home
+            span Shopping cart
+  // Breadcrumb End
+  // Shop Cart Section Begin
+  section.shop-cart.spad
+    .container
+      .row
+        .col-lg-12
+          .shop__cart__table
+            table
+              thead
+                tr
+                  th Product
+                  th Price
+                  th Quantity
+                  th Total
+                  th
+              tbody
+               each product in products 
+                tr(data-product-id=product._id)
+                  td.cart__product__item
+                    img(src=product.thumbnail width="90px" height="90px" alt='')
+                    .cart__product__item__title
+                      h6 #{product.title}
+                      .rating
+                        i.fa.fa-star.mx-1
+                        i.fa.fa-star.mx-1
+                        i.fa.fa-star.mx-1
+                        i.fa.fa-star.mx-1
+                        i.fa.fa-star.mx-1
+                  td.cart__price $ #{product.price - product.price*product.discountPercentage/100}
+                  td.cart__quantity
+                    .pro-qty
+                      input(type='number', value=product.quantity)
+                  td.cart__total $ #{(product.price - product.price*product.discountPercentage/100)*product.quantity}
+                  td.cart__close
+                    span.icon_close
+      .row
+        .col-lg-6.col-md-6.col-sm-6
+          .cart__btn
+            a(href='#') Continue Shopping
+        .col-lg-6.col-md-6.col-sm-6
+          .cart__btn.update__btn
+      .row
+        .col-lg-6
+          .discount__content
+            h6 Discount codes
+            form(action='#')
+              input(type='text', placeholder='Enter your coupon code')
+              button.site-btn(type='submit') Apply
+        .col-lg-4.offset-lg-2
+          .cart__total__procced
+            h6 Cart total
+            ul
+              li
+                | Subtotal 
+                span $ 750.0
+              li
+                | Total 
+                span $ 750.0
+            a.primary-btn(href='#') Proceed to checkout
+  // Shop Cart Section End
+  // Instagram Begin
+  .instagram
+    .container-fluid
+      .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-1.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-2.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-3.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-4.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-5.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-6.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+  // Instagram End
+  

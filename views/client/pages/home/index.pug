@@ -54,8 +54,8 @@ block main
                     a(href='#')
                       span.icon_heart_alt
                   li
-                    a(href='#')
-                      span.icon_bag_alt
+                    a()
+                      span.icon_bag_alt(data-productId = product._id)
               .product__item__text
                 h6
                   a(href=`/products/${product.slug}`) #{product.title}

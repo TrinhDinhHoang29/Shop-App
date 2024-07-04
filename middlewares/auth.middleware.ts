@@ -4,6 +4,7 @@ import usertModel from '../models/user.model';
 import { Request,Response,NextFunction } from 'express';
 import categorysModel from '../models/product-categorys.model';
 import { treeCategorys } from '../helpers/treeCategorys.helper';
+import cartsModel from '../models/carts.model';
  
 // const roleModel = require("../../models/roles.model");
 export  const checkToken = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
@@ -25,6 +26,13 @@ export const existsTokenUser = async (req:Request,res:Response,next:NextFunction
         const user = await usertModel.findOne({deleted:false,status:"active",tokenUser:req.cookies.tokenUser}).select("-password");
         if(user){
             res.locals.userInfo = user;
+            const cart = await cartsModel.findOne({user_id:user.id});
+            if(cart){
+                res.cookie("cartId",cart.id,{expires: new Date(Date.now()+360*24*60*60*1000)});
+                res.locals.cart = cart;
+            }else{
+                await cartsModel.updateOne({_id:res.locals.cart.id},{user_id:user.id});
+            }
         }
             
     }

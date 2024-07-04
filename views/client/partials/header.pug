@@ -15,10 +15,10 @@
     li
       a(href='#')
         span.icon_bag_alt
-        .tip 2
+        .tip #{cart.totalQuantity}
   .offcanvas__logo
-    a(href='./index.html')
-      img(src='img/logo.png', alt='')
+    a(href='/')
+      img(src='/img/logo.png', alt='')
   #mobile-menu-wrap
   .offcanvas__auth
     a(href='#') Login
@@ -30,8 +30,8 @@ header.header
     .row
       .col-xl-3.col-lg-2
         .header__logo
-          a(href='./index.html')
-            img(src='img/logo.png', alt='')
+          a(href='/')
+            img(src='/img/logo.png', alt='')
       .col-xl-6.col-lg-7
         nav.header__menu
           ul
@@ -71,9 +71,9 @@ header.header
                 span.icon_heart_alt
                 .tip 2
             li
-              a(href='#')
+              a(href='/carts')
                 span.icon_bag_alt
-                .tip 2
+                .tip.quantity-product-cart #{cart.totalQuantity}
     .canvas__open
       i.fa.fa-bars
 // Header Section End
