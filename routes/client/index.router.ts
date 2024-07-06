@@ -5,17 +5,20 @@ import categoryRouter from './categorys.router';
 import * as authMiddleware from '../../middlewares/auth.middleware';
 import { cartsMiddleware } from '../../middlewares/cart.middleware';
 import cartsRouter from './carts.router';
+import authRouter from './auth.router';
+import profileRouter from './profile.router';
+import otpRouter from './otp.router';
 export default (app:Express)=>{
-
-    app.use(cartsMiddleware,authMiddleware.existsTokenUser);
+    app.use(cartsMiddleware)
+    app.use(authMiddleware.existsTokenUser);
     app.use("/",homeRouter);
     app.use("/products",productRouter);
     app.use("/categorys",categoryRouter);
     app.use("/carts",cartsRouter);
 
-    // app.use("/",authRouter);
-    // app.use("/profile",authMiddleware.existsUserInfo,profileRouter);
-    // app.use("/otps",otpRouter);
+    app.use("/",authRouter);
+    app.use("/profile",authMiddleware.existsUserInfo,profileRouter);
+    app.use("/otps",otpRouter);
     // app.use("/search",searchRouter);
     // app.use("/favorites",authMiddleware.existsUserInfo,favoriteRouter);
 

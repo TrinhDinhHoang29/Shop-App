@@ -2,21 +2,28 @@ import express,{Express, NextFunction, Request,Response} from 'express';
 import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
 import cartsModel from '../../models/carts.model';
+import mongoose from 'mongoose';
 
 
-export const index = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
+export const index = async (req:Request,res:Response):Promise<void>=>{
 
-    const productIds = res.locals.cart.products.map(item=>item.product_id);
-    const products = await productsModel.find({_id:{$in:productIds}}).lean();
-    products.forEach(product=>{
-        const quantity =  res.locals.cart.products.find(item=>item.product_id==product._id).quantity;
-        product.quantity = quantity;
-       
-
-    })
-    res.render("client/pages/cart/index",{products:products});
+    try{
+        const productIds:any = res.locals.cart.products.map(item=>item.product_id);
+        const products = await productsModel.find({_id:{$in:productIds}}).select("-images -stock -status -description").lean();
+        
+        products.forEach(product=>{
+            const quantity =  res.locals.cart.products.find(item=>item.product_id==product._id).quantity;
+            product.quantity = quantity;
+        })
+        console.log(res.locals.cart.totalQuantity);
+        res.render("client/pages/cart/index",{products:products});
+    }catch(error){
+        console.log("erro:"+error);
+        res.send("Server error "+error);
+    }
+   
 }
-export const deleteProduct = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
+export const deleteProduct = async (req:Request,res:Response):Promise<void>=>{
     try{
         const product_id = req.params.product_id;
         const cart:any = await cartsModel.findOneAndUpdate({_id:req.cookies.cartId},{

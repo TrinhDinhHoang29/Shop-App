@@ -21,8 +21,13 @@
       img(src='/img/logo.png', alt='')
   #mobile-menu-wrap
   .offcanvas__auth
-    a(href='#') Login
-    a(href='#') Register
+    - if (userInfo) 
+      a(href='#') Logout 
+      a(href='#') 
+        i(class="fa-regular fa-user")
+    - else
+      a(href='#') Login
+      a(href='#') Register
 // Offcanvas Menu End
 // Header Section Begin
 header.header
@@ -38,7 +43,7 @@ header.header
             li.active
               a(href='/') Home
             li.category-header
-              a(href='/Products') Products
+              a(href='/categorys/all') Products
               +tree-category(categorysHeader) 
 
             li
@@ -61,8 +66,13 @@ header.header
       .col-lg-3
         .header__right
           .header__right__auth
-            a(href='#') Login
-            a(href='#') Register
+
+            - if (userInfo) 
+              a(href='/logout') Logout 
+              a(href='/profile') #{userInfo.fullName}       
+            - else
+              a(href='/login') Login
+              a(href='/register') Register
           ul.header__right__widget
             li
               span.icon_search.search-switch
@@ -72,7 +82,7 @@ header.header
                 .tip 2
             li
               a(href='/carts')
-                span.icon_bag_alt
+                span.icon_bag_alt 
                 .tip.quantity-product-cart #{cart.totalQuantity}
     .canvas__open
       i.fa.fa-bars

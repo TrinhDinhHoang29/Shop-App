@@ -401,7 +401,7 @@ ol {
 	transform: scale(1);
 }
 
-.header__menu ul li:hover a:after {
+.header__menu ul li:hover>a:after {
 	-webkit-transform: scale(1);
 	-ms-transform: scale(1);
 	transform: scale(1);
@@ -460,7 +460,7 @@ ol {
 	position: relative;
 }
 
-.header__menu ul li a:after {
+.header__menu ul li>a:after {
 	position: absolute;
 	left: 0;
 	bottom: 0;

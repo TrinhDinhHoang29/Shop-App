@@ -6,11 +6,11 @@ export const cartsMiddleware = async (req:Request,res:Response,next:NextFunction
         const cart = new cartsModel();
         await cart.save();    
         res.cookie("cartId",cart.id,{expires: new Date(Date.now()+360*24*60*60*1000)});
+        cart.totalQuantity = 0;
         res.locals.cart = cart;
     }
     else{
         const cart:any = await cartsModel.findOne({_id:req.cookies.cartId});
-        
         cart.totalQuantity = cart.products.reduce((total,current)=>total+current.quantity,0);
         res.locals.cart = cart;
     }

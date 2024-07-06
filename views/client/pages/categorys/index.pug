@@ -155,12 +155,12 @@ block main
             .col-lg-12.text-center
               .pagination__option
                 - if(objPagination.currentPage>1)
-                    a(href=`/categorys/${category.slug}?page=${objPagination.currentPage-1}`)
+                    a(href=`/categorys/${category.slug?category.slug:"all"}?page=${objPagination.currentPage-1}`)
                         i.fa.fa-angle-left   
                 - for(let i =objPagination.pageStart;i<=objPagination.pageEnd;i++)
-                    a(href=`/categorys/${category.slug}?page=${i}`) #{i}
+                    a(href=`/categorys/${category.slug?category.slug:"all"}?page=${i}`) #{i}
                 - if(objPagination.currentPage<objPagination.totalPage)
-                    a(href=`/categorys/${category.slug}?page=${objPagination.currentPage+1}`)
+                    a(href=`/categorys/${category.slug?category.slug:"all"}?page=${objPagination.currentPage+1}`)
                         i.fa.fa-angle-right                
                       
                 

@@ -7,12 +7,21 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
     try{
         
         const slugCategory:string = req.params.slug;
-        const category = await categorysModel.findOne({slug:slugCategory,status:"active",deleted:false});
-        const filter = {
+        let category:any = [];
+        let filter:any = {
             status:"active",
             deleted:false,
-            productCategoryId:category.id
+        };
+        if(slugCategory!="all"){
+             category = await categorysModel.findOne({slug:slugCategory,status:"active",deleted:false});
+              filter = {
+                status:"active",
+                deleted:false,
+                productCategoryId:category.id
+            }
         }
+       
+        
         // pagination start -----------------------------------
         let objPagination:any = {
             limiteItem:9,
