@@ -15,7 +15,6 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
             const quantity =  res.locals.cart.products.find(item=>item.product_id==product._id).quantity;
             product.quantity = quantity;
         })
-        console.log(res.locals.cart.totalQuantity);
         res.render("client/pages/cart/index",{products:products});
     }catch(error){
         console.log("erro:"+error);

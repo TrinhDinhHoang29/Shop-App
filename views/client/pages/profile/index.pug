@@ -1,8 +1,18 @@
 extends ../../layouts/default.pug
 block main
+    // Breadcrumb Begin
+    .breadcrumb-option
+        .container
+            .row
+                .col-lg-12
+                    .breadcrumb__links
+                        a(href='/')
+                            i.fa.fa-home
+                            |  Home
+                        a(href='/profile') Profile
+    // Breadcrumb End
     .main-content2
         .title-first.my-3 
-            h5 Profile
         .container 
             form(class="form-group" method="POST" action=`/profile?_method=PATCH` enctype="multipart/form-data")
                 div(class="mb-3" ) 

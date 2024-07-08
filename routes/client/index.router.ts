@@ -8,6 +8,7 @@ import cartsRouter from './carts.router';
 import authRouter from './auth.router';
 import profileRouter from './profile.router';
 import otpRouter from './otp.router';
+import checkoutRouter from './checkout.router';
 export default (app:Express)=>{
     app.use(cartsMiddleware)
     app.use(authMiddleware.existsTokenUser);
@@ -15,7 +16,7 @@ export default (app:Express)=>{
     app.use("/products",productRouter);
     app.use("/categorys",categoryRouter);
     app.use("/carts",cartsRouter);
-
+    app.use("/checkouts",checkoutRouter);
     app.use("/",authRouter);
     app.use("/profile",authMiddleware.existsUserInfo,profileRouter);
     app.use("/otps",otpRouter);

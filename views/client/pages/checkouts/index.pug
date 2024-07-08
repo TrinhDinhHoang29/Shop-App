@@ -1,0 +1,149 @@
+
+extends ../../layouts/default.pug
+
+block main
+  
+  // Breadcrumb Begin
+  .breadcrumb-option
+    .container
+      .row
+        .col-lg-12
+          .breadcrumb__links
+            a(href='./index.html')
+              i.fa.fa-home
+              |  Home
+            span Shopping cart
+  // Breadcrumb End
+  // Checkout Section Begin
+  section.checkout.spad
+    .container
+      .row
+        .col-lg-12
+          h6.coupon__link
+            span.icon_tag_alt
+            a(href='#') Have a coupon?
+            |  Click
+            |                     here to enter your code.
+      form.checkout__form(action='/checkouts?_method=PATCH' method="POST" )
+        .row
+          .col-lg-8
+            h5 Billing detail
+            .row
+              .col-lg-6.col-md-6.col-sm-6
+                .checkout__form__input
+                  p
+                    | First Name 
+                    span *
+                  input(type='text' name="firstName")
+              .col-lg-6.col-md-6.col-sm-6
+                .checkout__form__input
+                  p
+                    | Last Name 
+                    span *
+                  input(type='text' name="lastName")
+              .col-lg-12
+                .checkout__form__input
+                  p
+                    | Address 
+                    span *
+                  .css_select_div
+                    select#tinh.css_select(name='tinh', title='Chọn Tỉnh Thành')
+                      option(value='0') T&#x1EC9;nh Th&agrave;nh
+                    select#quan.css_select(name='quan', title='Chọn Quận Huyện')
+                      option(value='0') Qu&#x1EAD;n Huy&#x1EC7;n
+                    select#phuong.css_select(name='phuong', title='Chọn Phường Xã')
+                      option(value='0') Ph&#x1B0;&#x1EDD;ng X&atilde;
+              .col-lg-6.col-md-6.col-sm-6
+                .checkout__form__input
+                  p
+                    | Phone 
+                    span *
+                  input(type='text' name="phone")
+              .col-lg-6.col-md-6.col-sm-6
+                .checkout__form__input
+                  p
+                    | Email 
+                    span *
+                  input(type='text' name="email")
+              .col-lg-12
+                .checkout__form__input
+                  p
+                    | Oder notes 
+                    span *
+                  input(type='text' name="orderNote" placeholder='Note about your order, e.g, special noe for delivery')
+          .col-lg-4
+            .checkout__order
+              h5 Your order
+              .checkout__order__product
+                ul
+                  li
+                    span.top__text Product
+                    span.top__text__right Total
+                  each product,index in products  
+                    li
+                      | #{index+1}.#{product.title} 
+                      span $ #{(product.price - product.price*product.discountPercentage/100)*product.quantity}
+                 
+              .checkout__order__total
+                ul
+                  li
+                    | Subtotal 
+                    span $ #{products.totalPrice}
+                  li
+                    | Total 
+                    span $ #{products.totalPrice}
+              //- .checkout__order__widget
+              //-   label(for='o-acc')
+              //-     | Create an acount?
+              //-     input#o-acc(type='checkbox')
+              //-     span.checkmark
+              //-   p
+              //-     | Create am acount by entering the information below. If you are a returing customer
+              //-     | login at the top of the page.
+              //-   label(for='check-payment')
+              //-     | Cheque payment
+              //-     input#check-payment(type='checkbox')
+              //-     span.checkmark
+              //-   label(for='paypal')
+              //-     | PayPal
+              //-     input#paypal(type='checkbox')
+              //-     span.checkmark
+              button.site-btn(type='submit') Place oder
+  // Checkout Section End
+  // Instagram Begin
+  .instagram
+    .container-fluid
+      .row
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-1.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-2.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-3.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-4.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-5.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+        .col-lg-2.col-md-4.col-sm-4.p-0
+          .instagram__item.set-bg(data-setbg='/img/instagram/insta-6.jpg')
+            .instagram__text
+              i.fa.fa-instagram
+              a(href='#') @ ashion_shop
+  // Instagram End
+  script(src="https://esgoo.net/scripts/jquery.js")
+  script(src="/js/address-vn.js") 
