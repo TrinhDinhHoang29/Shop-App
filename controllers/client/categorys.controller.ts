@@ -7,11 +7,15 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
     try{
         
         const slugCategory:string = req.params.slug;
+        const priceStart = req.query.priceStart;
+        const priceEnd = req.query.priceEnd;
+        
         let category:any = [];
         let filter:any = {
             status:"active",
             deleted:false,
         };
+     
         if(slugCategory!="all"){
              category = await categorysModel.findOne({slug:slugCategory,status:"active",deleted:false});
               filter = {
@@ -21,6 +25,13 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
             }
         }
        
+        if(priceEnd&&priceStart)
+            {
+                filter.price= {
+                    $gte: priceStart,
+                    $lte: priceEnd
+                }
+            }
         
         // pagination start -----------------------------------
         let objPagination:any = {

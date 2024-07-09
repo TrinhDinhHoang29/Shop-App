@@ -12,3 +12,27 @@ export const detail = async (req:Request,res:Response):Promise<void>=>{
     }
     
 }
+export const listProducts = async (req:Request,res:Response):Promise<void>=>{
+    try{
+       const priceStart = req.params.priceStart;
+       const priceEnd = req.params.priceEnd;
+       const products = await productsModel.find({
+            status:"active",
+            deleted:false,
+            price: {
+                $gte: priceStart,
+                $lte: priceEnd
+            }
+       })
+       res.json({
+        code:200,
+        products:products
+       })
+    }catch(error){
+        res.json({
+            code:404,
+            error:error
+           })
+    }
+    
+}

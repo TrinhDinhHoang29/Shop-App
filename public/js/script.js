@@ -107,3 +107,26 @@ if(cart__closes.length>0){
 }
 
 //end
+
+
+
+
+//filter price 
+const filterPrice = document.querySelector("[filter__price]");
+if(filterPrice){
+    filterPrice.addEventListener("click",()=>{
+        const startInput = document.querySelector("#minamount");
+        const endInput = document.querySelector("#maxamount");
+        const start = startInput.value.split("$").join("");
+        const end = endInput.value.split("$").join("");
+        const url = new URL(window.location.href);
+        url.searchParams.set("priceStart",start);
+        url.searchParams.set("priceEnd",end);
+        window.location.href = url;
+
+    })
+}
+
+
+
+//end filter price

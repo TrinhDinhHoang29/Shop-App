@@ -33,93 +33,21 @@ block main
                             - if (category.childItem)
                                 each categoryChild in category.childItem
                                     li
-                                        a(href=`/categorys/${categoryChild.slug}`) #{categoryChild.title}
-                          
-                 
+                                        a(href=`/categorys/${categoryChild.slug}`) #{categoryChild.title}         
             .sidebar__filter
               .section-title
                 h4 Shop by price
               .filter-range-wrap
-                .price-range.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content(data-min='33', data-max='99')
+                .price-range.ui-slider.ui-corner-all.ui-slider-horizontal.ui-widget.ui-widget-content(data-min='1', data-max='99')
                 .range-slider
                   .price-input
                     p Price:
                     input#minamount(type='text')
                     input#maxamount(type='text')
-              a(href='#') Filter
-            .sidebar__sizes
-              .section-title
-                h4 Shop by size
-              .size__list
-                label(for='xxs')
-                  | xxs
-                  input#xxs(type='checkbox')
-                  span.checkmark
-                label(for='xs')
-                  | xs
-                  input#xs(type='checkbox')
-                  span.checkmark
-                label(for='xss')
-                  | xs-s
-                  input#xss(type='checkbox')
-                  span.checkmark
-                label(for='s')
-                  | s
-                  input#s(type='checkbox')
-                  span.checkmark
-                label(for='m')
-                  | m
-                  input#m(type='checkbox')
-                  span.checkmark
-                label(for='ml')
-                  | m-l
-                  input#ml(type='checkbox')
-                  span.checkmark
-                label(for='l')
-                  | l
-                  input#l(type='checkbox')
-                  span.checkmark
-                label(for='xl')
-                  | xl
-                  input#xl(type='checkbox')
-                  span.checkmark
-            .sidebar__color
-              .section-title
-                h4 Shop by size
-              .size__list.color__list
-                label(for='black')
-                  | Blacks
-                  input#black(type='checkbox')
-                  span.checkmark
-                label(for='whites')
-                  | Whites
-                  input#whites(type='checkbox')
-                  span.checkmark
-                label(for='reds')
-                  | Reds
-                  input#reds(type='checkbox')
-                  span.checkmark
-                label(for='greys')
-                  | Greys
-                  input#greys(type='checkbox')
-                  span.checkmark
-                label(for='blues')
-                  | Blues
-                  input#blues(type='checkbox')
-                  span.checkmark
-                label(for='beige')
-                  | Beige Tones
-                  input#beige(type='checkbox')
-                  span.checkmark
-                label(for='greens')
-                  | Greens
-                  input#greens(type='checkbox')
-                  span.checkmark
-                label(for='yellows')
-                  | Yellows
-                  input#yellows(type='checkbox')
-                  span.checkmark
-        .col-lg-9.col-md-9
+              a( filter__price) Filter
+
+
+        .col-lg-9.col-md-9.product__parent
           .row
             each product in products
                 .col-lg-4.col-md-6
@@ -137,8 +65,8 @@ block main
                                     a(href='#')
                                         span.icon_heart_alt
                                 li
-                                    a(href='#')
-                                        span.icon_bag_alt
+                                    a()
+                                        span.icon_bag_alt(data-productId = product._id)
                         .product__item__text
                             h6
                                 a(href='#') #{product.title}
@@ -151,7 +79,6 @@ block main
                             .product__price $ #{product.price-(product.price*product.discountPercentage)/100}
                                 - if (product.discountPercentage > 0)
                                     span $ #{product.price} 
-
             .col-lg-12.text-center
               .pagination__option
                 - if(objPagination.currentPage>1)
