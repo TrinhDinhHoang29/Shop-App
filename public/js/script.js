@@ -130,3 +130,34 @@ if(filterPrice){
 
 
 //end filter price
+
+
+//address
+const orderAddress = document.querySelector(".adress-order");
+if(orderAddress){
+    const arr = orderAddress.innerHTML.split(",");
+    fetch(`https://esgoo.net/api-tinhthanh/5/${arr[0]}.htm`)
+    .then(res=>res.json())
+    .then(res=>{
+        orderAddress.innerHTML = res.data.name
+    })
+}
+
+//address
+
+
+//cancel order 
+const btnCancelOrders = document.querySelectorAll("[button-cancel-order]");
+if(btnCancelOrders.length>0){
+    btnCancelOrders.forEach(btnCancelOrder=>{
+        btnCancelOrder.addEventListener("click",()=>{
+            if(window.confirm("Are you sure ??")){
+                const id = btnCancelOrder.getAttribute("button-cancel-order");
+                window.location.href = `/orders/delete/${id}`;
+            }
+        })
+    })
+}
+
+
+//cancel order

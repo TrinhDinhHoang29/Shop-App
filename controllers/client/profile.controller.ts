@@ -1,10 +1,18 @@
 import express,{Express, Request,Response} from 'express';
 import usersModel from '../../models/user.model';
 import otpModel from '../../models/otp.model';
+import ordersModel from '../../models/orders.models';
 import md5 from 'md5';
 export const index = async (req:Request,res:Response):Promise<void>=>{
 
-    res.render("client/pages/profile/index");
+    const orders = await ordersModel.find({
+       status:{
+        $ne:"cancel"
+       },
+        deleted:false,
+        user_id:res.locals.userInfo.id
+    });
+    res.render("client/pages/profile/index",{orders:orders});
     
 }
 export const updateProfile = async (req:Request,res:Response):Promise<void>=>{

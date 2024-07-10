@@ -67,7 +67,7 @@ export const checkoutsPost = async (req:Request,res:Response):Promise<void>=>{
             }
         })
         req["flash"]("success","Đặt thành công !!");
-        res.redirect("back");
+        res.redirect(`/orders/${order._id}`);
     }catch(error){
         req["flash"]("error","Đặt thất bại!!");
         res.redirect("back");

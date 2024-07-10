@@ -5,6 +5,7 @@ import { Request,Response,NextFunction } from 'express';
 import categorysModel from '../models/product-categorys.model';
 import { treeCategorys } from '../helpers/treeCategorys.helper';
 import cartsModel from '../models/carts.model';
+import ordersModel from '../models/orders.models';
  
 // const roleModel = require("../../models/roles.model");
 export  const checkToken = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
@@ -48,4 +49,12 @@ export const existsUserInfo = async (req:Request,res:Response,next:NextFunction)
     }else{
         res.redirect("/login");
     }
+}
+export const existsOrder = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
+    const orderId = req.params.id;
+    const order = await ordersModel.findOne({_id:orderId,user_id:res.locals.userInfo.id})
+    if(order)
+        next();
+    else
+        res.redirect("back");
 }
