@@ -42,7 +42,7 @@ block main
               i.fa.fa-star.mx-1
               i.fa.fa-star.mx-1
               i.fa.fa-star.mx-1
-              span ( 138 reviews )
+              span ( #{reviews.length} )
             .product__details__price $ #{product.price - (product.price*product.discountPercentage/100)}
                 - if (product.discountPercentage>0)
                     span $ #{product.price} 
@@ -106,24 +106,32 @@ block main
               li.nav-item
                 a.nav-link.active(data-toggle='tab', href='#tabs-1', role='tab') Description
               li.nav-item
-                a.nav-link(data-toggle='tab', href='#tabs-2', role='tab') Reviews ( 2 )
+                a.nav-link(data-toggle='tab', href='#tabs-2', role='tab') Reviews
             .tab-content
               #tabs-1.tab-pane.active(role='tabpanel')
                 p !{product.description}
               #tabs-2.tab-pane(role='tabpanel')
-                h6 Reviews ( 2 )
-                p
-                  | Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed
-                  | quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt loret.
-                  | Neque porro lorem quisquam est, qui dolorem ipsum quia dolor si. Nemo enim ipsam
-                  | voluptatem quia voluptas sit aspernatur aut odit aut loret fugit, sed quia ipsu
-                  | consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Nulla
-                  | consequat massa quis enim.
-                p
-                  | Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget
-                  | dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes,
-                  | nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium
-                  | quis, sem.
+                h6 Reviews 
+                ul.list-review 
+                 each review in reviews   
+                  li.row 
+                    .col-1
+                      img(src=review.user.avatar width="65px" height="65px"  alt="")
+                    .col-10
+                        h5 Trinh Dinh Hoang
+                        .date 
+                          span #{review.date}
+                        .rating
+                         - for(let i=0;i<review.rating;i++)
+                          i.fa.fa-star.mx-1                        
+                        .cmt-img 
+                          each img in review.images 
+                            img(src=img width="165px" height="165px" class="mr-3"  alt="")
+                        .comment 
+                          span #{review.comment}
+
+
+                 
       .row
         .col-lg-12.text-center
           .related__title

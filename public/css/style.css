@@ -3736,3 +3736,6 @@ ol {
 }
 .css_select_div{ text-align: center;}
 .css_select{ display: inline-table; width: 25%; padding: 5px; margin: 5px 2%; border: solid 1px #686868; border-radius: 5px;}
+.list-review>li>.col-1 img{
+	border-radius: 50%;
+}

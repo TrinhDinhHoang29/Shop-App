@@ -69,7 +69,7 @@ block main
                                         span.icon_bag_alt(data-productId = product._id)
                         .product__item__text
                             h6
-                                a(href='#') #{product.title}
+                                a(href=`/products/${product.slug}`) #{product.title}
                             .rating
                                 i.fa.fa-star.mx-1
                                 i.fa.fa-star.mx-1
@@ -88,10 +88,7 @@ block main
                     a(href=`/categorys/${category.slug?category.slug:"all"}?page=${i}`) #{i}
                 - if(objPagination.currentPage<objPagination.totalPage)
                     a(href=`/categorys/${category.slug?category.slug:"all"}?page=${objPagination.currentPage+1}`)
-                        i.fa.fa-angle-right                
-                      
-                
-              
+                        i.fa.fa-angle-right                              
   // Shop Section End  
   // Instagram Begin
   .instagram
