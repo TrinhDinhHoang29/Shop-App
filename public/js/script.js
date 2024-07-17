@@ -161,3 +161,52 @@ if(btnCancelOrders.length>0){
 
 
 //cancel order
+// findSuggest
+const findHeader = document.querySelector(".find-header > input");
+if(findHeader){
+    findHeader.addEventListener("focus",()=>{
+        const parentSuggest = document.querySelector(".suggest-find-header");
+        parentSuggest.style.display="block";
+    })
+    findHeader.addEventListener("blur",()=>{
+        const parentSuggest = document.querySelector(".suggest-find-header");
+        setTimeout(()=>{
+            parentSuggest.style.display="none";
+        },500)
+     
+    })
+    findHeader.addEventListener("keyup",()=>{
+       fetch(`/search/suggestFindProducts?keyword=${findHeader.value}`)
+       .then(res=>res.json())
+       .then(data=>{
+        if(data.code===200){
+            const parentSuggest = document.querySelector(".suggest-find-header");
+            parentSuggest.textContent = "";
+            data.data.forEach(product=>{
+                const elementA = document.createElement('a');
+                elementA.classList.add("result-find-header")
+                elementA.classList.add("my-1")
+                elementA.classList.add("mx-3")
+                elementA.classList.add("row")
+                elementA.href = `/products/${product.slug}`;
+                elementA.innerHTML = `
+                <div class="inner-find-img col-3"> 
+                    <img src="${product.thumbnail}" width="100%" height="100%" alt="" />
+                </div>
+                <div class="inner-find-text col-9">
+                    <div class="inner-find-title">
+                        <h5>${product.title}</h5>
+                    </div>
+                    <div class="inner-find-singer">${product.categoryTitle}</div>
+                </div>
+                `;
+                parentSuggest.appendChild(elementA);
+            }) 
+        }
+       })
+       
+    })
+}
+
+
+// findSuggest

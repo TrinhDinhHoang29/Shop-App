@@ -78,8 +78,11 @@ footer.footer
 // Footer Section End
 // Search Begin
 .search-model
-  .h-100.d-flex.align-items-center.justify-content-center
+  .h-100.d-flex.justify-content-center
     .search-close-switch +
     form.search-model-form
-      input#search-input(type='text', placeholder='Search here.....')
+      //- input#search-input(type='text',)
+      .input-group.find-header
+            input(class="form-control"  placeholder='Search here.....' name="keyword")#search-input
+            .suggest-find-header.show
 // Search End
