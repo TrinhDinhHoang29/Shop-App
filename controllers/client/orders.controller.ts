@@ -20,7 +20,6 @@ export const detail = async (req:Request,res:Response):Promise<void>=>{
             product.title = record.title;
             product.thumbnail = record.thumbnail;
         }
-
         res.render("client/pages/orders/detail",{order:order});
     }catch(error){
         console.log("erro:"+error);

@@ -1,0 +1,86 @@
+extends ../../layouts/default.pug
+
+block main
+  #content-wrapper.d-flex.flex-column
+    // Main Content
+    #content
+      // Topbar
+      include ../../partials/topbar.pug
+
+      .container.text-center
+        h2.m-3 Quản lý chủ đề 
+      .card.my-3
+        h5.card-header Bộ lọc và sắp xếp
+        .card-body
+          .row
+            .col-2 
+              select(name="type" class="form-select form-control py-1 text-center" type-view aria-label=".form-select-lg example")
+                option(value="" selected disabled) --- Hiển thị ---
+                option(value="4") 4 mục         
+                option(value="6") 6 mục
+                option(value="10") 10 mục          
+            .col-5
+              select(name="type" class="form-select form-control py-1 text-center" type-filter aria-label=".form-select-lg example")
+                option(value="" selected disabled) --- Lọc theo trạng thái ---
+                option(value="") Mặc định
+                //- option(value="title desc") Z-A                
+                option(value="ordered") Chưa xử lý
+                option(value="shipment") Đang vận chuyển 
+                option(value="success") Giao hàng thành công
+
+            .col-5
+              
+            
+      table(class="table table-hover m-3 text-center")
+        thead 
+          tr 
+            th STT
+            th ID hóa đơn
+            th Tên khách hàng
+            th Trạng thái
+            th Ngày đặt
+            th Hành động
+        tbody 
+          each item,index in orders
+            tr
+              td #{index+1}
+              td #{item._id}
+              td #{item.userInfo.fullName} 
+              td 
+                - if (item.status === "cancel")
+                    span.btn.badge.bg-danger.text-light Đã hủy 
+                - else if (item.status === "success")
+                    span.btn.badge.bg-success.text-light Thành công
+                - else 
+                    select(name="status" select-status data-staus-update=item._id)
+                        option(value="ordered" selected=(item.status==="ordered"?true:false)) Chưa xử lý
+                        option(value="shipment" selected=(item.status==="shipment"?true:false)) Đang vận chuyển 
+                        option(value="success" selected=(item.status==="success"?true:false)) Thành công           
+              td #{item.dateTime}          
+              td
+                a(href=`/admin/products/detail/${item._id}` class="btn btn-secondary mx-1") Chi tiết
+
+      .container.text-center
+        nav(aria-label="Page navigation example")
+          ul(class="pagination")
+            - if(objPagination.currentPage>1)
+                li(class="page-item")
+                    button(class="page-link" button-pagination=objPagination.currentPage-1 ) Trang trước        
+            - for(let i =objPagination.pageStart;i<=objPagination.pageEnd;i++)
+                li(class="page-item")
+                    button(class=`page-link ${objPagination.currentPage==i?"active":""}`  button-pagination=i) #{i}
+            - if(objPagination.currentPage<objPagination.totalPage)
+                li(class="page-item")
+                    button(class="page-link" button-pagination=objPagination.currentPage+1) Tiếp theo
+      // Footer
+      footer.sticky-footer.bg-white
+        .container.my-auto
+          .copyright.text-center.my-auto
+            span | Copyright © Your Website 2020
+
+  // Scroll to Top Button
+  a#scrollToTopButton.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+
+  
+

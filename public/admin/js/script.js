@@ -375,3 +375,25 @@ if(strDataRole){
 //end permission
 
 
+
+//select status for ordered
+const selectStatus = document.querySelectorAll('[select-status]');
+if(selectStatus.length>0){
+    selectStatus.forEach(item=>{
+        item.addEventListener("change",()=>{
+            const id = item.getAttribute("data-staus-update");
+            const option = {
+                method:"PATCH"
+            }
+            const link = `/admin/orders/status/${id}/${item.value}`;
+            fetch(link,option)
+            .then(res=>res.json())
+
+        })
+    })
+}
+
+
+
+// end select status for ordered
+

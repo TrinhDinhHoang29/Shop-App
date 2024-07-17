@@ -19,7 +19,8 @@ const orderSchema:Schema = new  mongoose.Schema({
             product_id:String,
             quantity:Number,
             price:Number,
-            discountPercentage:Number
+            discountPercentage:Number,
+            reviews_id:String
         }
     ],
     deleted:{

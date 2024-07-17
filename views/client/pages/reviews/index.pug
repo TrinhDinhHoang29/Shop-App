@@ -1,0 +1,49 @@
+extends ../../layouts/default.pug
+block main
+    // Breadcrumb Begin
+    .breadcrumb-option
+        .container
+            .row
+                .col-lg-12
+                    .breadcrumb__links
+                        a(href='/')
+                            i.fa.fa-home
+                            |  Home
+                        a(href='/profile') Chi tiết đơn hàng
+    // Breadcrumb End
+    .main-content2
+        .title-first.my-3 
+        .container 
+            .card 
+                .card-header Thông tin sản phẩm
+                
+                .card-body 
+                    //- h5.card-title Họ và tên người nhận: #{order.userInfo.fullName}
+                    //- h5.card-title Số điện thoại: #{order.userInfo.phone}
+                    div.row
+                        img(class="card-img-top col-3" src=product.thumbnail style="width:200px;" height="200pxs" alt="Card image cap")
+                        .col-9 
+                            form(action=`/reviews/${order_id}/${product._id}` method="post" enctype="multipart/form-data") 
+                                h5.my-3 #{product.title}
+                                label(for="" class="form-label") Số sao:
+                                select(name="rating" class="form-control mb-3") 
+                                    option(value="1" ) 1 Sao
+                                    option(value="2" ) 2 Sao
+                                    option(value="3" ) 3 Sao
+                                    option(value="4" ) 4 Sao
+                                    option(value="5" ) 5 Sao 
+                                label(for="" class="form-label") Bình luận:
+                                textarea(name="comment" class="form-control mb-3" cols="85%", rows="5") 
+                                .mb-3(upload-images)   
+                                    label(class="form-label d-block") Ảnh đính kèm
+                                    input(type="file" accept="image/*" class="form-file d-block" name="images"  multiple upload-images-input)
+                                    div
+                                        div(class = "" close-images-upload) x 
+                                        img(src=""  alt="" upload-images-preview width="200px" class="d-inline mx-3" max-height="200px")
+                                        img(src=""  alt="" upload-images-preview width="200px" class="d-inline mx-3" max-height="200px")
+                                        img(src=""  alt="" upload-images-preview width="200px" class="d-inline mx-3" max-height="200px") 
+                                button.form-control.btn.btn-primary Gửi
+                    //- h5.card-title Địa chỉ: 
+                    //-     span.adress-order #{order.userInfo.address}
+                    //- p.card-text Ghi chú: #{order.userInfo.note}      
+        

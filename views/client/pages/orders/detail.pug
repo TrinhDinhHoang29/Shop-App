@@ -40,7 +40,14 @@ block main
                             td 
                                 img(src=product.thumbnail width="100px" height="100px"  alt="")
                             td #{product.title}
-                            td #{product.price}
-                            td #{product.discountPercentage}
+                            td #{product.price} $
+                            td #{product.discountPercentage} %
                             td #{product.quantity}
                             td #{(product.price - (product.price*product.discountPercentage/100))*product.quantity} $
+                                - if (order.status === "success"&&!product.reviews_id)
+                                    div
+                                        a(href=`/reviews/${order._id}/${product.product_id}`).btn.btn-success.my-3 Đánh giá
+                                - else if (order.status === "success"&&product.reviews_id)
+                                    div
+                                        a(href=``).btn.btn-secondary.my-3 Xem đánh giá
+

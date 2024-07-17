@@ -10,6 +10,7 @@ import profileRouter from './profile.router';
 import otpRouter from './otp.router';
 import checkoutRouter from './checkout.router';
 import odersRouter from './orders.router';
+import reviewsRouter from './reviews.router';
 export default (app:Express)=>{
     app.use(cartsMiddleware)
     app.use(authMiddleware.existsTokenUser);
@@ -21,6 +22,7 @@ export default (app:Express)=>{
     app.use("/",authRouter);
     app.use("/profile",authMiddleware.existsUserInfo,profileRouter);
     app.use("/orders",authMiddleware.existsUserInfo,odersRouter);
+    app.use("/reviews",authMiddleware.existsUserInfo,reviewsRouter);
 
     app.use("/otps",otpRouter);
     // app.use("/search",searchRouter);
