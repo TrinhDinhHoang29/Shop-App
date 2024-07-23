@@ -3,10 +3,12 @@ import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
 import reviewsModel from '../../models/reviews.model';
 import orders from '../../models/orders.models';
+import { chatSocket } from '../../sockets/chat.socket';
 export const index = async (req:Request,res:Response):Promise<void>=>{
     const product = await productsModel.findOne({_id:req.params.product_id});
     
     res.render("client/pages/reviews/index",{order_id:req.params.order_id,product:product});
+    chatSocket(res);
 }
 export const indexPost = async (req:Request,res:Response):Promise<void>=>{
     try{

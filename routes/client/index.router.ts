@@ -24,7 +24,6 @@ export default (app:Express)=>{
     app.use("/profile",authMiddleware.existsUserInfo,profileRouter);
     app.use("/orders",authMiddleware.existsUserInfo,odersRouter);
     app.use("/reviews",authMiddleware.existsUserInfo,reviewsRouter);
-
     app.use("/otps",otpRouter);
     app.use("/search",searchRouter);
     // app.use("/favorites",authMiddleware.existsUserInfo,favoriteRouter);

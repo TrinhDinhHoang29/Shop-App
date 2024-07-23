@@ -3,6 +3,8 @@ import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
 import { isValidLimiteItem } from '../../validates/isValids.validates';
 import paginationHelper from '../../helpers/pagination';
+import { chatSocket } from '../../sockets/chat.socket';
+
 export const index = async (req:Request,res:Response):Promise<void>=>{
     try{
         
@@ -46,6 +48,7 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
         const products = await productsModel.find(filter).limit(objPagination.limiteItem).skip(objPagination.skipItem)
 
         res.render("client/pages/categorys/index",{category,products,objPagination:resultPagination});
+        chatSocket(res);
     }catch(error){
         res.status(404).send("Page error"+error);
     }

@@ -1,0 +1,28 @@
+mixin chat(chats)
+  .chat-bubble(onclick='toggleChatWindow()') 
+    i( class="fa-regular fa-message")
+    
+  - if(userInfo)
+   #chatWindow.chat-window
+    .chat-header Chat
+    .chat-body
+      .chat(myId=userInfo._id)
+       each chat in chats  
+        div(class=(chat.user_id==userInfo._id?"msg sent":"msg rcvd") data-time=`${chat.date.Hours}:${chat.date.Minutes}`)
+          | #{chat.content}  
+    .chat-footer
+      form#form(action='' style="width:100%;")
+        .input-group.parrentShowIcon
+          input#input.form-control(autocomplete='off')
+          .custom-file-container(data-upload-id='upload-images')
+          .input-group-append
+            label.btn.btn-light(for='file-upload-with-preview-upload-images')
+              i.fa.fa-light.fa-image
+            .btn.btn-light.showIcon 
+              i(class="fa-regular fa-face-smile")
+            span.button-icon.hidden
+              emoji-picker
+          .input-group-append
+            button.btn.btn-light 
+              i(class="fa-regular fa-paper-plane")
+            //-   i.fa-solid.fa-paper-plane

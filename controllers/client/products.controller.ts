@@ -3,6 +3,8 @@ import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
 import reviewsModel from '../../models/reviews.model';
 import usersModel from '../../models/user.model';
+import { chatSocket } from '../../sockets/chat.socket';
+
 export const detail = async (req:Request,res:Response):Promise<void>=>{
     try{
         const slug = req.params.slug;
@@ -17,6 +19,7 @@ export const detail = async (req:Request,res:Response):Promise<void>=>{
             review.date = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
         })
         res.render("client/pages/products/detail",{product,products,reviews:reviews});
+        chatSocket(res);
     }catch(error){
         res.status(404).send("Page error"+error);
     }

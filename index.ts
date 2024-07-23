@@ -20,7 +20,13 @@ const app:Express = express();
 const port:number|string = process.env.PORT||8080;
 
 
-
+//socket
+import http from 'http';
+const server = http.createServer(app);
+import { Server } from "socket.io";
+const io = new Server(server);
+global._io = io;
+//end socket
 
 
 
@@ -41,6 +47,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
+
+  
 routerClient(app);
 routerAdmin(app);
 
@@ -48,6 +56,6 @@ app.get("*",(req,res)=>{
     res.send("bug");
 })
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log("App run on port: "+process.env.PORT);
 })

@@ -1,6 +1,8 @@
 import express,{Express, Request,Response} from 'express';
 import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
+import { chatSocket } from '../../sockets/chat.socket';
+
 export const index = async (req:Request,res:Response):Promise<void>=>{
     const categorys = await categorysModel.
                                             find({status:"active",deleted:false}).
@@ -32,4 +34,5 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
         productTrends,
         productFeatures
     });
+    chatSocket(res);
 }

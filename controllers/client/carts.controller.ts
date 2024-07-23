@@ -3,6 +3,8 @@ import categorysModel from '../../models/product-categorys.model';
 import productsModel from '../../models/products.model';
 import cartsModel from '../../models/carts.model';
 import mongoose from 'mongoose';
+import { chatSocket } from '../../sockets/chat.socket';
+
 
 
 export const index = async (req:Request,res:Response):Promise<void>=>{
@@ -20,7 +22,7 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
         console.log("erro:"+error);
         res.send("Server error "+error);
     }
-   
+    chatSocket(res);
 }
 export const deleteProduct = async (req:Request,res:Response):Promise<void>=>{
     try{

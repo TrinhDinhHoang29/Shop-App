@@ -210,3 +210,13 @@ if(findHeader){
 
 
 // findSuggest
+
+
+function toggleChatWindow() {
+    var chatWindow = document.getElementById("chatWindow");
+    if (chatWindow.style.display === "none" || chatWindow.style.display === "") {
+        chatWindow.style.display = "flex";
+    } else {
+        chatWindow.style.display = "none";
+    }
+}

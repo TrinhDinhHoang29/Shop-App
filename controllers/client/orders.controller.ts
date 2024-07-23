@@ -1,6 +1,7 @@
 import express,{Express, NextFunction, Request,Response} from 'express';
 import ordersModel from '../../models/orders.models';
 import productsModel from '../../models/products.model';
+import { chatSocket } from '../../sockets/chat.socket';
 
 
 export const detail = async (req:Request,res:Response):Promise<void>=>{
@@ -25,7 +26,7 @@ export const detail = async (req:Request,res:Response):Promise<void>=>{
         console.log("erro:"+error);
         res.send("Server error "+error);
     }
-   
+    chatSocket(res);
 }
 
 export const deleted = async (req:Request,res:Response):Promise<void>=>{

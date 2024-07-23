@@ -6,8 +6,11 @@ import categorysModel from '../models/product-categorys.model';
 import { treeCategorys } from '../helpers/treeCategorys.helper';
 import cartsModel from '../models/carts.model';
 import ordersModel from '../models/orders.models';
- 
+import roomChatModel from '../models/roomChat.model';
+import chatModel from '../models/chat.model';
+ import { convertDate } from '../helpers/convertDate.helper';
 // const roleModel = require("../../models/roles.model");
+
 export  const checkToken = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
     if(!req.cookies.token){
         res.redirect("/admin/auth/login");
@@ -35,6 +38,9 @@ export const existsTokenUser = async (req:Request,res:Response,next:NextFunction
             }else{
                 await cartsModel.updateOne({_id:res.locals.cart.id},{user_id:user.id});
             }
+            const roomChat = await roomChatModel.findOne({user_id:user.id});
+            const chats = await chatModel.find({room_chat_id:roomChat.id}).lean();            
+            res.locals.chats = convertDate(chats);
         }
             
     }

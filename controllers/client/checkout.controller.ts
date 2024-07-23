@@ -2,6 +2,7 @@ import express,{Express, NextFunction, Request,Response} from 'express';
 import productsModel from '../../models/products.model';
 import ordersModel from '../../models/orders.models';
 import carts from '../../models/carts.model';
+import { chatSocket } from '../../sockets/chat.socket';
 
 
 export const index = async (req:Request,res:Response):Promise<void>=>{
@@ -19,8 +20,9 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
             return total+=parseFloat(price);
         },0);
        res.render("client/pages/checkouts/index",{products:products});
+       chatSocket(res);
     }catch(error){
-       
+       res.status(404).send("server error !!");
     }
    
 }

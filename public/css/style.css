@@ -30,13 +30,14 @@
 
 /* Template default CSS
 /*----------------------------------------*/
-
+* {margin: 0; box-sizing: border-box;}
 
 html,
 body {
 	height: 100%;
 	font-family: "Montserrat", sans-serif;
 	-webkit-font-smoothing: antialiased;
+	
 }
 
 .category-header,.category-header li {
@@ -3759,3 +3760,193 @@ ol {
 .inner-find-img{
     height: 100%;
 }
+
+
+
+/* chat */
+.chat-bubble {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+	width: 60px;
+	height: 60px;
+	background-color: #0084ff;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	color: white;
+	font-size: 24px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	z-index: 1000;
+}
+
+.chat-window {
+	position: fixed;
+	bottom: 90px;
+	right: 20px;
+	width: 450px;
+	height: 500px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+	display: none;
+	flex-direction: column;
+	overflow: hidden;
+	z-index: 1000;
+}
+
+.chat-header {
+	padding: 10px;
+	background-color: #0084ff;
+	color: white;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.chat-body {
+	padding: 10px;
+	flex: 1;
+	overflow-y: auto;
+}
+
+.chat-footer {
+	padding: 10px;
+	display: flex;
+}
+
+.chat-footer input {
+	flex: 1;
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-right: 5px;
+}
+
+.chat-footer button {
+	padding: 5px 10px;
+	background-color: #0084ff;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* dá */
+/* QuickReset */ * {margin: 0; box-sizing: border-box;}
+
+.chat {
+--rad: 20px;
+--rad-sm: 3px;
+font: 16px/1.5 sans-serif;
+display: flex;
+flex-direction: column;
+padding: 20px;
+max-width: 500px;
+margin: auto;
+}
+
+.msg {
+position: relative;
+max-width: 75%;
+padding: 7px 15px;
+margin-bottom: 2px;
+}
+
+.msg.sent {
+border-radius: var(--rad) var(--rad-sm) var(--rad-sm) var(--rad);
+background: #42a5f5;
+color: #fff;
+/* moves it to the right */
+margin-left: auto;
+}
+
+.msg.rcvd {
+border-radius: var(--rad-sm) var(--rad) var(--rad) var(--rad-sm);
+background: #f1f1f1;
+color: #555;
+/* moves it to the left */
+margin-right: auto;
+}
+
+/* Improve radius for messages group */
+
+.msg.sent:first-child,
+.msg.rcvd+.msg.sent {
+border-top-right-radius: var(--rad);
+}
+
+.msg.rcvd:first-child,
+.msg.sent+.msg.rcvd {
+border-top-left-radius: var(--rad);
+}
+
+
+/* time */
+
+.msg::before {
+content: attr(data-time);
+font-size: 0.8rem;
+position: absolute;
+bottom: 100%;
+color: #888;
+white-space: nowrap;
+/* Hidden by default */
+display: none;
+}
+
+.msg.sent::before {
+right: 15px;
+}
+
+.msg.rcvd::before {
+left: 15px;
+}
+
+
+/* Show time only for first message in group */
+
+.msg:first-child::before,
+.msg.sent+.msg.rcvd::before,
+.msg.rcvd+.msg.sent::before {
+/* Show only for first message in group */
+display: block;
+}
+/* chat end */
+.button-icon.hidden{
+    display: none;
+}
+
+.button-icon{
+    position: absolute;
+    top: -1050%;
+    left: 52%;
+}
+.showTyping{
+    display: block;
+}
+.hiddenTyping{
+    display: none;
+}
+ .custom-file-container .label-container {
+    display: none;
+}
+
+ .custom-file-container .input-container{
+   display: none;
+}
+ .custom-file-container .image-preview{
+   height: auto;
+   padding: 0;
+   border-radius:0 ;
+ }
+  .custom-file-container .image-preview-item{
+    width:70px;
+    background-size: contain;
+  }
+   .custom-file-container{   
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }

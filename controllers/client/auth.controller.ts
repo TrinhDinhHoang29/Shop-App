@@ -2,6 +2,8 @@ import express,{Express, Request,RequestHandler,Response} from 'express';
 import usersModel from '../../models/user.model';
 import otpModel from '../../models/otp.model';
 import md5 from 'md5';
+import roomChatModel from '../../models/roomChat.model';
+
 export const login = async (req:Request,res:Response):Promise<void>=>{
 
 
@@ -43,6 +45,10 @@ export const registerPost = async (req:Request,res:Response):Promise<void>=>{
         }
         const user =  new usersModel(userBody);
         await user.save();
+        const roomChat = new roomChatModel({
+            user_id:user._id
+        })
+        await roomChat.save();
         req["flash"]("success","Tạo tài khoản thành công");
         res.redirect("back");
     }catch(error){

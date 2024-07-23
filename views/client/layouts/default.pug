@@ -1,5 +1,7 @@
 include ../../admin/mixins/messages-alert.pug
 include ../mixins/tree-category.pug
+include ../mixins/chat.pug
+
 doctype html
 head
   meta(charset='UTF-8')
@@ -13,6 +15,7 @@ head
   //end link css
 +messages-success(5000)
 +messages-error(5000)
++chat(chats)
 
 include ../partials/header.pug
 block main
@@ -22,3 +25,9 @@ include ../partials/footer.pug
 // Js Plugins
 
 include ../partials/link-script.pug
+script(src="/socket.io/socket.io.js")
+script(src="/js/socketIO.js") 
+script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+script(src="/js/chat.js") 
+
+
