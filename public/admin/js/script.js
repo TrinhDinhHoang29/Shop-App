@@ -396,4 +396,12 @@ if(selectStatus.length>0){
 
 
 // end select status for ordered
+//click click-announcement
+const announcementMessage = document.querySelector("[click-announcement]");
+if(announcementMessage){
+    announcementMessage.addEventListener("click",()=>{
+        announcementMessage.querySelector("[count-announcement]").innerHTML = '';
+    })
+}
 
+//end click-announcement

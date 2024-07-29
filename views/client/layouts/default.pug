@@ -15,7 +15,8 @@ head
   //end link css
 +messages-success(5000)
 +messages-error(5000)
-+chat(chats)
+- if (chats)
+  +chat(chats)
 
 include ../partials/header.pug
 block main

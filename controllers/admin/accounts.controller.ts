@@ -37,10 +37,6 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
 
     const accounts = await accountModel.find(filter).limit(objPagination.limiteItem).skip(objPagination.skipItem).sort(sort).lean()
     .select("-password -token");
-    
-
-
-
     res.render("admin/pages/accounts/index",{accounts:accounts,objPagination:resultPagination});
 }
 export const create = async (req:Request,res:Response):Promise<void>=>{

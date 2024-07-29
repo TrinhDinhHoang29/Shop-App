@@ -8,8 +8,11 @@ import cartsModel from '../models/carts.model';
 import ordersModel from '../models/orders.models';
 import roomChatModel from '../models/roomChat.model';
 import chatModel from '../models/chat.model';
- import { convertDate } from '../helpers/convertDate.helper';
-// const roleModel = require("../../models/roles.model");
+import { convertDate } from '../helpers/convertDate.helper';
+import { roomChatsFillter } from '../helpers/roomChatFilter.helper';
+
+
+
 
 export  const checkToken = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{
     if(!req.cookies.token){
@@ -23,6 +26,8 @@ export  const checkToken = async (req:Request,res:Response,next:NextFunction):Pr
     }
     res.locals.account = account;
     res.locals.role = await roleModel.findOne({_id:account.roleId,deleted:false});
+    res.locals.roomChats = await roomChatsFillter();
+
     next();
 }
 export const existsTokenUser = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{

@@ -7,6 +7,10 @@ const chatSchema = new  mongoose.Schema({
     deleted:{
         type:Boolean, 
         default:false
+    },
+    read:{
+        type:Boolean,
+        default:false
     }
 },{
     timestamps:true

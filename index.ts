@@ -25,7 +25,6 @@ import http from 'http';
 const server = http.createServer(app);
 import { Server } from "socket.io";
 const io = new Server(server);
-global._io = io;
 //end socket
 
 
@@ -47,7 +46,10 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')));
 
-
+app.use((req,res,next)=>{
+    res["io"] = io;
+    next();
+})
   
 routerClient(app);
 routerAdmin(app);

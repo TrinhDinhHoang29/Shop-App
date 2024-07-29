@@ -8,24 +8,27 @@ const bodyChat = document.querySelector(".chat-body");
 // });
 
 //end upload file preview
-form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const content = input.value;
-    // const images = upload.cachedFileArray;
-    // if (content||images.length>0) {
-    // socket.emit('CLIENT_SEND_MESSAGE',{
-    //     content:content,
-    //     images:images
-    // });
-    // }
-    socket.emit('CLIENT_SEND_MESSAGE',{
-        content:content
+if(form){
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const content = input.value;
+        // const images = upload.cachedFileArray;
+        // if (content||images.length>0) {
+        // socket.emit('CLIENT_SEND_MESSAGE',{
+        //     content:content,
+        //     images:images
+        // });
+        // }
+        socket.emit('CLIENT_SEND_MESSAGE',{
+            content:content
+        });
+        input.value = '';
+        bodyChat.scrollTop = bodyChat.scrollHeight;                   
+    
+        // upload.resetPreviewPanel();
     });
-    input.value = '';
-    bodyChat.scrollTop = bodyChat.scrollHeight;                   
+}
 
-    // upload.resetPreviewPanel();
-});
 
 const chatBubble = document.querySelector(".chat-bubble");
 if(chatBubble){
@@ -41,10 +44,8 @@ socket.on('SEVER_RETURN_MESSAGE', function(data) {
     let text = "";
     const myId = chat.getAttribute("myId");
     element.classList="msg";
-
     if(data.user_id==myId){
         element.classList.add("sent");
-    
     }else{
         element.classList.add("rcvd");
     }
@@ -61,5 +62,5 @@ socket.on('SEVER_RETURN_MESSAGE', function(data) {
     // }
     element.innerHTML = data.content;
     chat.appendChild(element);
-    bodyChat.scrollTop = bodyChat.scrollHeight;                   
+    bodyChat.scrollTop = bodyChat.scrollHeight;      
 });
