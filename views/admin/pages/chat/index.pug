@@ -1,0 +1,38 @@
+extends ../../layouts/default.pug
+
+block main
+  #content-wrapper.d-flex.flex-column
+   #content
+    include ../../partials/topbar.pug
+    .row.justify-content-center.my-3
+        div(class="chat col-5" roomChatId=roomChatId myId = account._id)
+            .inner-body 
+                each item in chats
+                    div(class=item.type_send=="admin"?"inner-outgoing":"inner-incoming")
+                        - if (item.type_send=="user")
+                            .inner-name #{item.fullName}
+                        .inner-content #{item.content}
+                            - if(item.images.length>0)
+                                .inner-images 
+                                    each image in item.images
+                                        img(src=image alt="" width="90px" class="mx-2") 
+            form( id="form" action="")
+                div.input-group.parrentShowIcon 
+                    input(id="input" class="form-control" autocomplete="off")
+                    div(class="custom-file-container" data-upload-id="upload-images")
+                    div.input-group-append
+                        label(for="file-upload-with-preview-upload-images" class="btn btn-light") 
+                            i(class="fa fa-light fa-image")
+                        div.btn.btn-light.showIcon 
+                            i(class="fa-solid fa-face-smile")
+                        span(class="button-icon hidden")
+                            emoji-picker
+                    div.input-group-append
+                        button.btn.btn-light
+                            i( class="fa-solid fa-paper-plane")
+
+  a#scrollToTopButton.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+    script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+
+

@@ -10,6 +10,10 @@ mixin chat(chats)
        each chat in chats  
         div(class=(chat.user_id==userInfo._id?"msg sent":"msg rcvd") data-time=`${chat.date.Hours}:${chat.date.Minutes}`)
           | #{chat.content}  
+          - if(chat.images.length>0)
+            .inner-images 
+                each image in chat.images
+                    img(src=image alt="" width="90px" class="mx-2") 
     .chat-footer
       form#form(action='' style="width:100%;")
         .input-group.parrentShowIcon

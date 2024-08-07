@@ -220,3 +220,5 @@ function toggleChatWindow() {
         chatWindow.style.display = "none";
     }
 }
+
+

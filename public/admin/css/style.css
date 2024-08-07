@@ -29,7 +29,7 @@ Thông báo  */
     border-color: #bff0de;
 }
 .custom-file-container > .image-preview > .image-preview-item{
-    height: 200px;
+    height: 100px;
 }
 .custom-file-container > .label-container{
     display: none;

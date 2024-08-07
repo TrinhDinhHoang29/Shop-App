@@ -66,14 +66,14 @@ nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
         h6.dropdown-header
           | Message Center
         each roomChat in roomChats
-         a.dropdown-item.d-flex.align-items-center(href='#')
+         a.dropdown-item.d-flex.align-items-center(href=`/admin/chats/${roomChat._id}`)
           .dropdown-list-image.mr-3
             img.rounded-circle(src=(roomChat.user.avatar?roomChat.user.avatar:"img/undraw_profile_3.svg"), alt='...')
             .status-indicator.bg-success
           div(class=(roomChat.messageEnd.read==true?"":"font-weight-bold"))
             .text-truncate #{roomChat.messageEnd.content}
             .small.text-gray-500 #{roomChat.user.fullName} &middot; #{roomChat.messageEnd.timeDifference}
-        a(class="dropdown-item text-center small text-gray-500" href="#") Read More Messages
+        a(class="dropdown-item text-center small text-gray-500" href="/") Read More Messages
    
     .topbar-divider.d-none.d-sm-block
     // Nav Item - User Information
