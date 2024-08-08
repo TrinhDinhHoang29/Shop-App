@@ -221,4 +221,13 @@ function toggleChatWindow() {
     }
 }
 
+// const btnReview = document.querySelector(".btn-review");
+// if(btnReview){
+//     btnReview.addEventListener("click",(e)=>{
+//         e.preventDefault();
+//         socket.emit("CLIENT_SEND_NOTIFICATIONS",{
+//             type:"reviews"
+//         });
+//     })
 
+// }

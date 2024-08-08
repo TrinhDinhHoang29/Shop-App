@@ -9,6 +9,19 @@ if(elementCountAnnouncement){
 
     }
 }
+
+const elementCountNotifications = document.querySelector("[count-notifications]");
+if(elementCountNotifications){
+    const dropdownList = document.querySelector("[notifications-admin]");
+    const coutNotification = dropdownList.querySelectorAll(".font-weight-bold");
+    if(coutNotification.length==6){
+        elementCountNotifications.innerHTML = `6+`
+    }else{
+        elementCountNotifications.innerHTML = coutNotification.length;
+
+    }
+}
+
 socket.on('SERVER_RETURN_ANNOUNCEMENT', function(data) {
    const dropdownList = document.querySelector("[announcement-admin]");
    if(dropdownList){
@@ -38,17 +51,48 @@ socket.on('SERVER_RETURN_ANNOUNCEMENT', function(data) {
     dropdownList.innerHTML+= `<a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>`
    }
 })
+socket.on("SERVER_RETURN_NOTIFICATION",(data)=>{
+    const dropdownList = document.querySelector("[notifications-admin]");
+    const coutNotification = dropdownList.querySelectorAll(".font-weight-bold");
+    if(coutNotification.length==6){
+        elementCountNotifications.innerHTML = `6+`
+    }else{
+        elementCountNotifications.innerHTML = coutNotification.length;
+
+    }
+    dropdownList.innerHTML = `<h6 class='dropdown-header'> Alerts Center </h6>`;
+    data.forEach(notification=>{
+        dropdownList.innerHTML+=`
+          <a class="dropdown-item d-flex align-items-center" href="#">
+            <div class="mr-3">
+                <div class="icon-circle bg-primary">
+                    <i class="fas fa-file-alt text-white"></i>
+                </div>
+            </div>
+            <div>
+                <div class="small text-gray-500">${notification.fullName} - ${notification.timeDifference}</div>
+                <span class=${notification.is_read==true?"":"font-weight-bold"}>
+                ${notification.type==="reviews"?" Đã đánh giá một sản phẩm !!":"Đã đặt một đơn hàng mới !!"}
+                </span>
+            </div>
+        </a>
+        `;
+    })
+
+
+});
 var form = document.getElementById('form');
 var input = document.getElementById('input');
 const bodyChat = document.querySelector(".inner-body");
-// upload file preview
-const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-images',{
-    multiple:true,
-    maxFileCount:6//Số lượng hình ảnh
-});
 
-//end upload file preview
 if(form){
+    // upload file preview
+    const upload = new FileUploadWithPreview.FileUploadWithPreview('upload-images',{
+        multiple:true,
+        maxFileCount:6//Số lượng hình ảnh
+    });
+
+    //end upload file preview
     form.addEventListener('submit', function(e) {
         e.preventDefault();
         const content = input.value;
@@ -126,3 +170,6 @@ document.querySelector('emoji-picker').addEventListener('emoji-click', event => 
   inputChat.focus();
 });
 //end Icon chat
+
+
+

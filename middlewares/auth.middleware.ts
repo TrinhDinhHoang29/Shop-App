@@ -10,7 +10,7 @@ import roomChatModel from '../models/roomChat.model';
 import chatModel from '../models/chat.model';
 import { convertDate } from '../helpers/convertDate.helper';
 import { roomChatsFillter } from '../helpers/roomChatFilter.helper';
-
+import { formatNotificationHelper } from '../helpers/formatNotifications.helper';
 
 
 
@@ -27,7 +27,7 @@ export  const checkToken = async (req:Request,res:Response,next:NextFunction):Pr
     res.locals.account = account;
     res.locals.role = await roleModel.findOne({_id:account.roleId,deleted:false});
     res.locals.roomChats = await roomChatsFillter();
-
+    res.locals.notifications = await formatNotificationHelper();
     next();
 }
 export const existsTokenUser = async (req:Request,res:Response,next:NextFunction):Promise<void>=>{

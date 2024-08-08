@@ -3,7 +3,7 @@ import productsModel from '../../models/products.model';
 import ordersModel from '../../models/orders.models';
 import carts from '../../models/carts.model';
 import { chatSocket } from '../../sockets/chat.socket';
-
+import { addNotification } from '../../sockets/notifications.socket';
 
 export const index = async (req:Request,res:Response):Promise<void>=>{
 
@@ -68,6 +68,14 @@ export const checkoutsPost = async (req:Request,res:Response):Promise<void>=>{
                 }
             }
         })
+        //Display notification realtime 
+        const data = {
+            user_id:res.locals.userInfo._id,
+            type:"orders",
+            type_id:order.id,
+        }
+        await addNotification(res,data);
+        //End display notification realtime
         req["flash"]("success","Đặt thành công !!");
         res.redirect(`/orders/${order._id}`);
     }catch(error){

@@ -3,6 +3,8 @@ import chatModel from "../models/chat.model";
 import roomChatModel from "../models/roomChat.model";
 import { calculateTimeDifference } from "../helpers/calculateTimeDifference.helper";
 import * as uploadCloud from '../helpers/uploadCloud.helper';
+import reviewsModel from '../models/reviews.model';
+import notificationsModel from "../models/notifications.model";
 export const chatSocket = (res)=>{
     
     res["io"].once('connection', async (socket) => {
@@ -36,6 +38,23 @@ export const chatSocket = (res)=>{
                  res["io"].to(roomChat.id).emit("SERVER_RETURN_ANNOUNCEMENT",roomChats);
 
             })
+
+            // socket.on('CLIENT_SEND_NOTIFICATIONS',async(data)=>{
+            //     let objNotification:any = {
+            //         user_id:res.locals.userInfo._id,
+                    
+            //     };
+            //     if(data.type=="reviews"){
+            //         const reviews = await reviewsModel.find().sort({createdAt:"desc"}).limit(1);
+            //         objNotification.type = "reviews";
+            //         objNotification.type_id =reviews[0].id;
+
+            //     }
+            //     const notifications = new notificationsModel(objNotification);
+            //     await notifications.save();
+            //     console.log(notifications);
+
+            // })
         }
         
       });
