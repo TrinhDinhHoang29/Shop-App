@@ -3,6 +3,7 @@ import ordersModel from '../../models/orders.models';
 import * as isValid from "../../validates/isValids.validates";
 import paginationHelper from '../../helpers/pagination';
 import productCategorysModel from '../../models/product-categorys.model';
+import productsModel from '../../models/products.model'
 export const index = async (req:Request,res:Response):Promise<void>=>{
     type typeFilter={
         deleted:boolean,
@@ -70,16 +71,29 @@ export const index = async (req:Request,res:Response):Promise<void>=>{
 //         res.redirect("back");
 //     }
 // }
-// export const detail = async (req:Request,res:Response):Promise<void>=>{
-//     const id = req.params.id;
-//     try{
-//         const product = await productsModel.findOne({_id:id});
-//         res.render("admin/pages/products/detail",{product:product})
-//     }catch(error){
-//         res.redirect("back");
-//     }
+export const detail = async (req:Request,res:Response):Promise<void>=>{
+    try{
+
+        const orderId = req.params.orderId;
+        const order:any = await ordersModel.findOne({_id:orderId}).lean();
+        const productIds = order.products.map(item=>item.product_id);
+        const products = await productsModel.find({
+            _id:{
+                $in:productIds
+            }
+        }).select("title thumbnail");
+        
+        for(const product of order.products){
+            const record = products.find(item=>item._id==product.product_id);
+            product.title = record.title;
+            product.thumbnail = record.thumbnail;
+        }
+        res.render("admin/pages/orders/detail",{order:order})
+    }catch(error){
+        res.redirect("back");
+    }
     
-// }
+}
 // export const edit = async (req:Request,res:Response):Promise<void>=>{
 //     const id = req.params.id;
 //     const productCategorys = await productCategorysModel.find({});

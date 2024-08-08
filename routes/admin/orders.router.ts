@@ -5,6 +5,8 @@ const router = Router();
 
 
 router.get("/",orderController.index)
+router.get("/detail/:orderId",orderController.detail)
+
 router.patch("/:actionUpdate/:id/:status",orderController.actionUpdate);
 
 

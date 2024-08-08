@@ -24,7 +24,7 @@ nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
               button.btn.btn-primary(type='button')
                 i.fas.fa-search.fa-sm
     // Nav Item - Alerts
-    li.nav-item.dropdown.no-arrow.mx-1
+    li.nav-item.dropdown.no-arrow.mx-1(click-notification)
       a#alertsDropdown.nav-link.dropdown-toggle(href='#', role='button', data-toggle='dropdown', aria-haspopup='true', aria-expanded='false')
         i.fas.fa-bell.fa-fw
         // Counter - Alerts
@@ -34,7 +34,7 @@ nav.navbar.navbar-expand.navbar-light.bg-white.topbar.mb-4.static-top.shadow
         h6.dropdown-header
           | Alerts Center
         each notification in notifications
-         a.dropdown-item.d-flex.align-items-center(href='#')
+         a.dropdown-item.d-flex.align-items-center(href="" link=(notification.type==="reviews"?"":`/admin/orders/detail/${notification.type_id}`) notification-id=notification._id)
           .mr-3
             .icon-circle.bg-primary
               i.fas.fa-file-alt.text-white

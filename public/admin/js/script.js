@@ -405,3 +405,50 @@ if(announcementMessage){
 }
 
 //end click-announcement
+
+//click click-notification
+const clickNotification = document.querySelector("[click-notification]");
+if(clickNotification){
+    clickNotification.addEventListener("click",()=>{
+        clickNotification.querySelector("[count-notifications]").innerHTML = '';
+    })
+}
+
+//end click-notification
+
+
+//address
+const orderAddress = document.querySelector(".adress-order");
+if(orderAddress){
+    const arr = orderAddress.innerHTML.split(",");
+    fetch(`https://esgoo.net/api-tinhthanh/5/${arr[0]}.htm`)
+    .then(res=>res.json())
+    .then(res=>{
+        orderAddress.innerHTML = res.data.name
+    })
+}
+
+//address
+
+
+// update read notification 
+
+const elementDropdownList = document.querySelector("[notifications-admin]");
+if(elementDropdownList){
+    const arr = elementDropdownList.querySelectorAll("[notification-id]");
+    arr.forEach( (element) => {
+       element.addEventListener("click",(e)=>{
+            e.preventDefault();
+             fetch(`/admin/notifications/update_read/${element.getAttribute("notification-id")}`)
+             .then(res=>res.json())
+             .then(data=>{
+                window.location.href = element.getAttribute("link");
+             })
+            
+    
+       }) 
+    });
+}
+
+
+// end update read notification

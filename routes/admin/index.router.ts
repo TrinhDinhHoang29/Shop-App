@@ -12,6 +12,7 @@ import productCategorys from './product-categorys.router'
 import orderRouter from './orders.router';
 import { connectSocketAdmin } from '../../sockets/chat.socket';
 import chatRouter from './chat.router';
+import notificationRouter from './notification.router';
 
 export default (app:Express)=>{
     app.use("/admin/home",authMiddleware.checkToken,connectSocketAdmin,homeRouter);
@@ -24,6 +25,7 @@ export default (app:Express)=>{
     app.use("/admin/products",authMiddleware.checkToken,connectSocketAdmin,prodcuts);
     app.use("/admin/orders",authMiddleware.checkToken,connectSocketAdmin,orderRouter);
     app.use("/admin/chats",authMiddleware.checkToken,connectSocketAdmin,chatRouter);
+    app.use("/admin/notifications",authMiddleware.checkToken,connectSocketAdmin,notificationRouter);
 
 
 
