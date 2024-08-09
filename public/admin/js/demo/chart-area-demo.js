@@ -27,14 +27,16 @@ function number_format(number, decimals, dec_point, thousands_sep) {
   return s.join(dec);
 }
 function getDataUser(month,year){
-  const elementDataUsers = document.querySelector("[data-users]");
-  const dataUsers = JSON.parse(elementDataUsers.getAttribute("data-users"));
-  let countUser = 0;
-  dataUsers.forEach(data => {
-      if(data.dateTime == `${month}/${year}`)
-        countUser++;
-  });
-  return countUser;
+  const elementDataOrders = document.querySelector("[data-orders]");
+  const dataOrders = JSON.parse(elementDataOrders.getAttribute("data-orders"));
+
+ return dataOrders.reduce((totalValue,currentValue) => {
+    const date = new Date(currentValue.createdAt);
+      if(`${date.getMonth()+1}/${date.getFullYear()}` == `${month}/${year}`)
+        return totalValue + currentValue.products.reduce((total,current)=>total+((current.price-current.price*(current.discountPercentage/100)*current.quantity)),0)
+      return totalValue;
+  },0);
+  
 }
 
 
@@ -144,7 +146,7 @@ var myLineChart = new Chart(ctx, {
       callbacks: {
         label: function(tooltipItem, chart) {
           var datasetLabel = chart.datasets[tooltipItem.datasetIndex].label || '';
-          return "Người" + ':' + number_format(tooltipItem.yLabel);
+          return "Doanh thu" + ': $' + number_format(tooltipItem.yLabel);
         }
       }
     }
