@@ -231,3 +231,28 @@ function toggleChatWindow() {
 //     })
 
 // }
+//send otp
+const sendOTP = document.querySelector("[send-otp-forgot-password]")
+if(sendOTP){
+    sendOTP.addEventListener("click",()=>{
+        const email = document.querySelector("[email-forgot-password]").value;
+        fetch("/otps/create-forgot-password",{
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: "POST",
+              body: JSON.stringify({
+                email:email
+              })
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            document.querySelector("[message-otp]").innerHTML = data.message;
+        })
+    })
+}
+
+
+// end send otp
+console.log("asd");

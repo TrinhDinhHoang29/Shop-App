@@ -2,7 +2,6 @@ import express,{Express, Request,Response} from 'express';
 
 import usersModel from '../../models/user.model';
 import paginationHelper from '../../helpers/pagination';
-import * as validateTopic from '../../validates/topic.validate';
 import * as isValid from '../../validates/isValids.validates';
 import categorysModel from '../../models/product-categorys.model';
 
