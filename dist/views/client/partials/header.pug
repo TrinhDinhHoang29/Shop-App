@@ -1,0 +1,89 @@
+// Page Preloder
+#preloder
+  .loader
+// Offcanvas Menu Begin
+.offcanvas-menu-overlay
+.offcanvas-menu-wrapper
+  .offcanvas__close +
+  ul.offcanvas__widget
+    li
+      span.icon_search.search-switch
+    li
+      a(href='#')
+        span.icon_heart_alt
+        .tip 2
+    li
+      a(href='#')
+        span.icon_bag_alt
+        .tip #{cart.totalQuantity}
+  .offcanvas__logo
+    a(href='/')
+      img(src='/img/logo.png', alt='')
+  #mobile-menu-wrap
+  .offcanvas__auth
+    - if (userInfo) 
+      a(href='#') Logout 
+      a(href='#') 
+        i(class="fa-regular fa-user")
+    - else
+      a(href='#') Login
+      a(href='#') Register
+// Offcanvas Menu End
+// Header Section Begin
+header.header
+  .container-fluid
+    .row
+      .col-xl-3.col-lg-2
+        .header__logo
+          a(href='/')
+            img(src='/img/logo.png', alt='')
+      .col-xl-6.col-lg-7
+        nav.header__menu
+          ul
+            li.active
+              a(href='/') Home
+            li.category-header
+              a(href='/categorys/all') Products
+              +tree-category(categorysHeader) 
+
+            li
+              a(href='./shop.html') Shop
+            li
+              a(href='#') Pages
+              ul.dropdown
+                li
+                  a(href='./product-details.html') Product Details
+                li
+                  a(href='./shop-cart.html') Shop Cart
+                li
+                  a(href='./checkout.html') Checkout
+                li
+                  a(href='./blog-details.html') Blog Details
+            li
+              a(href='./blog.html') Blog
+            li
+              a(href='./contact.html') Contact
+      .col-lg-3
+        .header__right
+          .header__right__auth
+
+            - if (userInfo) 
+              a(href='/logout') Logout 
+              a(href='/profile') #{userInfo.fullName}       
+            - else
+              a(href='/login') Login
+              a(href='/register') Register
+          ul.header__right__widget
+            li
+              span.icon_search.search-switch
+            li
+              a(href='#')
+                span.icon_heart_alt
+                .tip 2
+            li
+              a(href='/carts')
+                span.icon_bag_alt 
+                .tip.quantity-product-cart #{cart.totalQuantity}
+    .canvas__open
+      i.fa.fa-bars
+// Header Section End

@@ -1,0 +1,34 @@
+include ../../admin/mixins/messages-alert.pug
+include ../mixins/tree-category.pug
+include ../mixins/chat.pug
+
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='description', content='Ashion Template')
+  meta(name='keywords', content='Ashion, unica, creative, html')
+  meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  meta(http-equiv='X-UA-Compatible', content='ie=edge')
+  title Ashion | Template
+  //link css
+  include ../partials/link-css.pug
+  //end link css
++messages-success(5000)
++messages-error(5000)
+- if (chats)
+  +chat(chats)
+
+include ../partials/header.pug
+block main
+//footer
+include ../partials/footer.pug
+//end footer
+// Js Plugins
+script(src="/socket.io/socket.io.js")
+script(src="/js/socketIO.js") 
+include ../partials/link-script.pug
+
+script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+script(src="/js/chat.js") 
+
+

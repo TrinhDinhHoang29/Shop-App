@@ -1,0 +1,49 @@
+extends ../../layouts/default.pug
+
+block main
+  #content-wrapper.d-flex.flex-column
+    // Main Content
+    #content
+      // Topbar
+      include ../../partials/topbar.pug
+      .container.text-center
+        h2.m-3 Profile
+      .container 
+        form(class="form-group" method="POST" action=`/admin/profile?_method=PATCH` enctype="multipart/form-data")
+          div(class="mb-3" ) 
+            label(class="form-label d-block") Họ và tên 
+                span.text-danger *
+            input(type="text" require class="form-control d-block" name="fullName" value=account.fullName)
+          div(class="mb-3" ) 
+            label(class="form-label d-block") Email 
+                span.text-danger *
+            .input-group
+                input(type="text" require class="form-control d-block" name="Email" disabled value=account.email)
+                .input-group-append
+                    a(href="/admin/profile/change-email" class="btn btn-primary")  Đổi email
+          div(class="mb-3" ) 
+            label(class="form-label d-block") Mật khẩu 
+                span.text-danger *
+            .input-group
+                input(type="password" require class="form-control d-block" name="password" disabled value="***************")
+                .input-group-append
+                    a(href="/admin/profile/change-password" class="btn btn-primary")  Đổi mật khẩu          
+          div(class="mb-3" upload-image) 
+            label(class="form-label d-block") Ảnh đại diện
+            input(type="file" accept="image/*" class="form-file d-block" name="avatar" value=account.avatar upload-image-input)
+            div
+                div(class = "" close-image-upload) x 
+                img(src=account.avatar  alt="" upload-image-preview width="200px" class="d-inline" max-height="200px")   
+          button.btn.btn-primary(type='submit') Submit
+      
+      // Footer
+      footer.sticky-footer.bg-white
+        .container.my-auto
+          .copyright.text-center.my-auto
+            span | Copyright © Your Website 2020
+
+  // Scroll to Top Button
+  a#scrollToTopButton.scroll-to-top.rounded(href='#page-top')
+    i.fas.fa-angle-up
+
+

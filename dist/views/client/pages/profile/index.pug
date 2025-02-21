@@ -1,0 +1,69 @@
+extends ../../layouts/default.pug
+block main
+    // Breadcrumb Begin
+    .breadcrumb-option
+        .container
+            .row
+                .col-lg-12
+                    .breadcrumb__links
+                        a(href='/')
+                            i.fa.fa-home
+                            |  Home
+                        a(href='/profile') Profile
+    // Breadcrumb End
+    .main-content2
+        .title-first.my-3 
+
+        .container 
+            form(class="form-group" method="POST" action=`/profile?_method=PATCH` enctype="multipart/form-data")
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Họ và tên 
+                        span.text-danger *
+                    input(type="text" require class="form-control d-block" name="fullName" value=userInfo.fullName)
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Email 
+                        span.text-danger *
+                    .input-group
+                        input(type="text" require class="form-control d-block" name="Email" disabled value=userInfo.email)
+                        .input-group-append
+                            a(href="/profile/change-email" class="btn btn-primary")  Đổi email
+                div(class="mb-3" ) 
+                    label(class="form-label d-block") Mật khẩu 
+                        span.text-danger *
+                    .input-group
+                        input(type="password" require class="form-control d-block" name="password" disabled value="***************")
+                        .input-group-append
+                            a(href="/profile/change-password" class="btn btn-primary")  Đổi mật khẩu          
+                div(class="mb-3" upload-image) 
+                    label(class="form-label d-block") Ảnh đại diện
+                    input(type="file" accept="image/*" class="form-file d-block" name="avatar" value=userInfo.avatar upload-image-input)
+                    div
+                        div(class = "" close-image-upload) x 
+                        img(src=userInfo.avatar  alt="" upload-image-preview width="200px" class="d-inline" max-height="200px")   
+                input(type="submit" class="btn btn-primary" value="Chỉnh sửa")
+        .container.text-center 
+            h2 Danh sách các đơn hàng
+        .container 
+            table(class="table table-hover m-3 text-center")
+                thead 
+                    tr 
+                        th STT
+                        th Mã đơn hàng
+                        th Người nhận
+                        th Số điện thoại
+                        th Số lượng sản phẩm
+                        th Trạng thái
+                        th Hành động
+                tbody 
+                    each order,index in orders 
+                        tr 
+                            td #{index}
+                            td #{order.id}
+                            td #{order.userInfo.fullName}
+                            td #{order.userInfo.phone}
+                            td #{order.products.length}
+                            td #{order.status}
+                            td 
+                                a(href=`/orders/${order._id}` class="btn btn-secondary mb-1 d-block") Chi tiết
+                                - if(order.status==="ordered") 
+                                    button(class="btn btn-danger mb-1 d-block" button-cancel-order=order._id) Hủy đơn 

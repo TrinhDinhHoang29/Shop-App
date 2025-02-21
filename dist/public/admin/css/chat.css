@@ -1,0 +1,73 @@
+.inner-body {
+    border: 1px solid gray;
+    max-height: 450px;
+    overflow-y: auto;
+    position: relative;
+    height: 450px;
+}
+
+.inner-content {
+    font-weight: 700;
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 10px;
+    max-width: 90%;
+    overflow-wrap: break-word;
+}
+.inner-name{
+    margin-left: 5px;
+}
+.inner-outgoing .inner-content{
+    background-color: pink;
+    color: white;
+
+}
+.inner-outgoing{
+    text-align: right;
+}
+.inner-incoming .inner-content{
+    background-color: gainsboro;
+    color: black;
+}
+
+.button-icon.hidden{
+    display: none;
+}
+
+.button-icon{
+    position: absolute;
+    top: -1050%;
+    left: 52%;
+}
+.parrentShowIcon{
+    /* position: relative; */
+
+}
+.showTyping{
+    display: block;
+}
+.hiddenTyping{
+    display: none;
+}
+.chat .custom-file-container .label-container {
+    display: none;
+}
+
+.chat .custom-file-container .input-container{
+   display: none;
+}
+.chat .custom-file-container .image-preview{
+   height: auto;
+   padding: 0;
+   border-radius:0 ;
+ }
+ .chat .custom-file-container .image-preview-item{
+    width:70px;
+    background-size: contain;
+  }
+  .chat .custom-file-container{   
+    position: absolute;
+    top: 100%;
+    width: 100%;
+  }

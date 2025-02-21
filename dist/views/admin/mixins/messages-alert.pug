@@ -1,0 +1,8 @@
+mixin messages-success(dataTime)
+    - if(messages.success)
+            .messages.info.my-3
+                div(class="alert alert-success" show-alert data-time=dataTime) #{messages.success}
+mixin messages-error(dataTime)
+    - if(messages.error)
+            .messages.info.my-3
+                div(class="alert alert-danger" show-alert data-time=dataTime) #{messages.error}

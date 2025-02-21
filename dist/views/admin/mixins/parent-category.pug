@@ -1,0 +1,6 @@
+mixin parent-category(records,index=1,parentId='')
+    each element in records 
+        - const tab =Array(index+1).join("-- ")
+        option(value=element.id selected=(element.id===parentId?true:false)) #{tab}#{element.title}
+        if element.childItem
+            +parent-category(element.childItem,index+1,parentId)
